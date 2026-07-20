@@ -1,0 +1,14 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/haekka-public-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'API key generated in Haekka account settings, passed as `Authorization: Bearer
+    {key}`.'
+  sources:
+  - openapi/haekka-public-api-openapi.yml
