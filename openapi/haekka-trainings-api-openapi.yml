@@ -1,0 +1,127 @@
+openapi: 3.1.0
+info:
+  title: Haekka Public Employee Trainings API
+  version: '1.0'
+  description: The Haekka Public API provides read access to a company's employees, trainings, and employee-training records, plus the ability to assign trainings to employees and update employee-training completion. Haekka is a Slack-native microlearning and security-awareness training platform. API keys are generated in Haekka account settings and passed as a bearer token.
+  contact:
+    name: Haekka Support
+    url: https://www.haekka.com/support
+    email: hello@haekka.com
+  x-provenance:
+    generated: '2026-07-19'
+    method: generated
+    source: https://www.haekka.com/documentation/haekka-public-api-documentation
+    note: Faithfully modeled from Haekka's published Public API documentation (routes, HTTP methods, bearer auth, and documented request fields). Field schemas are intentionally open (additionalProperties) where the docs do not enumerate response fields; nothing is fabricated.
+servers:
+- url: https://app.haekka.com/api/public
+  description: Haekka Public API
+security:
+- bearerAuth: []
+tags:
+- name: Trainings
+  description: Training courses configured for the company.
+paths:
+  /trainings:
+    get:
+      operationId: listTrainings
+      tags:
+      - Trainings
+      summary: List trainings
+      description: Returns all trainings associated with the company.
+      responses:
+        '200':
+          description: A list of trainings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Training'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trainings/{training_id}:
+    get:
+      operationId: getTraining
+      tags:
+      - Trainings
+      summary: Get a training
+      description: Returns data for a specific training.
+      parameters:
+      - $ref: '#/components/parameters/TrainingId'
+      responses:
+        '200':
+          description: The requested training.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /trainings/assign:
+    post:
+      operationId: assignTraining
+      tags:
+      - Trainings
+      summary: Assign a training to employees
+      description: Assigns a training to one or more employees. Requires the training id and a list of employee ids. Optionally alerts the assigned employees.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - training_id
+              - employee_ids
+              properties:
+                training_id:
+                  type: string
+                  description: The id of the training to assign.
+                employee_ids:
+                  type: array
+                  description: The ids of the employees to assign the training to.
+                  items:
+                    type: string
+                alert_employees:
+                  type: boolean
+                  default: true
+                  description: Whether to alert the assigned employees. Defaults to true.
+      responses:
+        '200':
+          description: The training was assigned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    TrainingId:
+      name: training_id
+      in: path
+      required: true
+      description: The id of the training.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required fields.
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+  schemas:
+    Training:
+      type: object
+      description: A training course configured for the company.
+      properties:
+        id:
+          type: string
+          description: The unique id of the training.
+      additionalProperties: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key generated in Haekka account settings, passed as `Authorization: Bearer {key}`.'

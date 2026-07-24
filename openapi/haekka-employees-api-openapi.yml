@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Haekka Public Employee Trainings Employees API
+  version: '1.0'
+  description: The Haekka Public API provides read access to a company's employees, trainings, and employee-training records, plus the ability to assign trainings to employees and update employee-training completion. Haekka is a Slack-native microlearning and security-awareness training platform. API keys are generated in Haekka account settings and passed as a bearer token.
+  contact:
+    name: Haekka Support
+    url: https://www.haekka.com/support
+    email: hello@haekka.com
+  x-provenance:
+    generated: '2026-07-19'
+    method: generated
+    source: https://www.haekka.com/documentation/haekka-public-api-documentation
+    note: Faithfully modeled from Haekka's published Public API documentation (routes, HTTP methods, bearer auth, and documented request fields). Field schemas are intentionally open (additionalProperties) where the docs do not enumerate response fields; nothing is fabricated.
+servers:
+- url: https://app.haekka.com/api/public
+  description: Haekka Public API
+security:
+- bearerAuth: []
+tags:
+- name: Employees
+  description: Company employees enrolled in Haekka.
+paths:
+  /employees:
+    get:
+      operationId: listEmployees
+      tags:
+      - Employees
+      summary: List employees
+      description: Returns a list of all active employees in the company.
+      responses:
+        '200':
+          description: A list of active employees.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employees/{employee_id}:
+    get:
+      operationId: getEmployee
+      tags:
+      - Employees
+      summary: Get an employee
+      description: Retrieves employee data for a specific employee.
+      parameters:
+      - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '200':
+          description: The requested employee.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Employee:
+      type: object
+      description: An active employee in the company.
+      properties:
+        id:
+          type: string
+          description: The unique id of the employee.
+      additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+    NotFound:
+      description: The requested resource was not found.
+  parameters:
+    EmployeeId:
+      name: employee_id
+      in: path
+      required: true
+      description: The id of the employee.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key generated in Haekka account settings, passed as `Authorization: Bearer {key}`.'
