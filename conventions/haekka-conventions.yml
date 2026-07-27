@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.haekka.com/documentation/haekka-public-api-documentation
+base_url: https://app.haekka.com/api/public
+media_type: application/json
+authentication:
+  style: bearer
+  header: Authorization
+  format: 'Bearer {key}'
+  key_source: Generated in Haekka account settings.
+  ref: authentication/haekka-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header documented. No Idempotency pointer emitted.
+pagination:
+  supported: false
+  note: List endpoints return arrays with no documented pagination params or cursor.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+versioning:
+  style: product-release-notes
+  ref: lifecycle/haekka-lifecycle.yml
+error_envelope:
+  format: undocumented
+  ref: errors/haekka-problem-types.yml
+rate_limiting:
+  signaled: false
+  note: No rate-limit headers or limits documented.

@@ -1,0 +1,26 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/haekka-public-api-openapi.yml
+format: http-status
+note: >-
+  Haekka's Public API documentation does not publish an error-code reference
+  (no error codes, envelope, or problem+json format documented). These entries
+  are DERIVED from the standard HTTP responses implied by a bearer-authenticated
+  REST API with path parameters and request bodies. Not fabricated beyond
+  standard HTTP semantics; titles/remediation are generic.
+problems:
+  - status: 401
+    title: Unauthorized
+    detail: Authentication is missing or the API key is invalid.
+    remediation: 'Generate an API key in Haekka account settings and send it as `Authorization: Bearer {key}`.'
+    applies_to: [listEmployees, getEmployee, listTrainings, getTraining, assignTraining, listEmployeeTrainings, getEmployeeTraining, updateEmployeeTraining]
+  - status: 404
+    title: Not Found
+    detail: The requested resource id does not exist.
+    remediation: Verify the employee_id, training_id, or employee_training_id.
+    applies_to: [getEmployee, getTraining, getEmployeeTraining, updateEmployeeTraining]
+  - status: 400
+    title: Bad Request
+    detail: The request body is malformed or missing required fields.
+    remediation: For assignTraining supply training_id and employee_ids; for updateEmployeeTraining supply completion_status and/or completion_rate (0-100).
+    applies_to: [assignTraining, updateEmployeeTraining]

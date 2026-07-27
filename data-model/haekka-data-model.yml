@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/haekka-public-api-openapi.yml
+entities:
+  - name: Employee
+    id_field: id
+    description: An active employee in the company.
+  - name: Training
+    id_field: id
+    description: A training course configured for the company.
+  - name: EmployeeTraining
+    id_field: id
+    description: A per-employee training assignment and its completion state.
+    fields: [employee_id, training_id, completion_status, completion_rate]
+relationships:
+  - from: EmployeeTraining
+    to: Employee
+    type: belongs_to
+    via: employee_id
+  - from: EmployeeTraining
+    to: Training
+    type: belongs_to
+    via: training_id
+  - from: Employee
+    to: EmployeeTraining
+    type: has_many
+    via: employee_id
+  - from: Training
+    to: EmployeeTraining
+    type: has_many
+    via: training_id

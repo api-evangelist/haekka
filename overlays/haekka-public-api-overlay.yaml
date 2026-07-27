@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Haekka Public API
+  version: 1.0.0
+extends: openapi/haekka-public-api-openapi.yml
+x-provenance:
+  generated: '2026-07-19'
+  method: generated
+  source: openapi/haekka-public-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: true
+      x-apievangelist-review-date: '2026-07-19'
+  - target: $.info
+    update:
+      x-product-areas:
+        - Training
+        - Streams
+        - Workflows
+        - Engagements
+        - Phishing
+  - target: $.info
+    update:
+      x-agent-ready-notes: >-
+        Small read-mostly API (8 operations) over employees, trainings, and
+        employee-training records with two write operations (assign training,
+        update completion). Bearer-token auth. No documented pagination,
+        idempotency, or webhooks as of this review.

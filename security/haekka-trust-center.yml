@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+source: https://www.haekka.com/security
+url: https://www.haekka.com/security
+note: >-
+  Haekka publishes a security page describing its security posture and controls.
+  The SOC 2 / ISO 27001 / PCI Level 1 / FISMA / SOX certifications named on the
+  page are held by Haekka's underlying infrastructure providers (AWS and Heroku),
+  NOT claimed by Haekka directly. Recorded here as attributed to infrastructure;
+  no Compliance pointer is emitted since Haekka does not publish its own audited
+  certification.
+certifications: []
+infrastructure_certifications:
+  provider: [AWS, Heroku]
+  named: [ISO 27001, SOC 2/SSAE 16, PCI Level 1, FISMA Moderate, SOX]
+haekka_controls:
+  - AES-256 encryption at rest
+  - TLS 1.2+ in transit
+  - MFA enforcement
+  - 90-day audit logging
+  - internal penetration testing
+evidence:
+  - source: https://www.haekka.com/security
+    keywords:
+      - security posture
+      - data center compliance

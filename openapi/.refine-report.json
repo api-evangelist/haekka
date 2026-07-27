@@ -1,0 +1,18 @@
+{
+  "provider": "haekka",
+  "sources": [
+    "haekka-employee-trainings-api-openapi.yml",
+    "haekka-employees-api-openapi.yml",
+    "haekka-trainings-api-openapi.yml"
+  ],
+  "outputs": [
+    "haekka-employee-trainings-api-openapi.yml",
+    "haekka-employees-api-openapi.yml",
+    "haekka-trainings-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

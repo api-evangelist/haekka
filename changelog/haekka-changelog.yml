@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.haekka.com/documentation
+scheme: semver
+current_version: 6.6.0
+note: >-
+  Haekka publishes dated release notes under /documentation (each "Haekka
+  Release x.y.z"). Exact publish dates are not exposed in the index listing, so
+  date is left null rather than fabricated; highlights are taken verbatim from
+  the release-note summaries.
+entries:
+  - version: 6.6.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-6-6-0
+    highlights: Several improvements to the training and security-awareness experience.
+  - version: 6.5.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-6-5-0
+    highlights: Features, bug fixes and improvements.
+  - version: 6.3.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-6-3-0
+    highlights: Docebo integration, improved Slack interactions, new admin controls.
+  - version: 6.2.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-6-2-0
+    highlights: Enhancements to the engagement and reporting process.
+  - version: 6.0.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-6-0-0
+    highlights: Feature-rich August release with new features and bug fixes.
+  - version: 5.1.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-5-1-0
+    highlights: Phishing updates including AI-generated email templates; bug fixes.
+  - version: 5.0.0
+    date: null
+    url: https://www.haekka.com/documentation/haekka-release-5-0-0
+    highlights: Packed release including API training-assignment updates.

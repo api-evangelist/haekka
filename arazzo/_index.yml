@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/haekka-public-api-openapi.yml
+workflows:
+  - file: haekka-assign-training.yml
+    workflowId: assignTrainingToEmployees
+    title: Assign a Haekka training to employees
+    summary: List trainings and active employees, then assign a training and confirm.
+  - file: haekka-sync-completion.yml
+    workflowId: syncEmployeeTrainingCompletion
+    title: Sync a Haekka employee-training completion
+    summary: Read an employee-training record, update its completion state, and confirm.

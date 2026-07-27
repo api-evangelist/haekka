@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.haekka.com/documentation
+versioning:
+  scheme: semver-product-release
+  current: 6.6.0
+  note: >-
+    Haekka versions the product with semantic release notes (e.g. 6.6.0). The
+    Public API path (/api/public) carries no version segment; API changes are
+    described in the dated release notes rather than a URL/header version.
+  docs: https://www.haekka.com/documentation
+deprecation:
+  policy_url: null
+  sunset_header: null
+  note: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+status_page: https://status.haekka.com/
+deprecated_operations: []

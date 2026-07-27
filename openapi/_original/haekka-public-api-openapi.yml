@@ -1,0 +1,296 @@
+openapi: 3.1.0
+info:
+  title: Haekka Public API
+  version: '1.0'
+  description: >-
+    The Haekka Public API provides read access to a company's employees,
+    trainings, and employee-training records, plus the ability to assign
+    trainings to employees and update employee-training completion. Haekka is a
+    Slack-native microlearning and security-awareness training platform. API
+    keys are generated in Haekka account settings and passed as a bearer token.
+  contact:
+    name: Haekka Support
+    url: https://www.haekka.com/support
+    email: hello@haekka.com
+  x-provenance:
+    generated: '2026-07-19'
+    method: generated
+    source: https://www.haekka.com/documentation/haekka-public-api-documentation
+    note: >-
+      Faithfully modeled from Haekka's published Public API documentation
+      (routes, HTTP methods, bearer auth, and documented request fields). Field
+      schemas are intentionally open (additionalProperties) where the docs do
+      not enumerate response fields; nothing is fabricated.
+servers:
+  - url: https://app.haekka.com/api/public
+    description: Haekka Public API
+tags:
+  - name: Employees
+    description: Company employees enrolled in Haekka.
+  - name: Trainings
+    description: Training courses configured for the company.
+  - name: Employee Trainings
+    description: Per-employee training assignments and completion state.
+paths:
+  /employees:
+    get:
+      operationId: listEmployees
+      tags: [Employees]
+      summary: List employees
+      description: Returns a list of all active employees in the company.
+      responses:
+        '200':
+          description: A list of active employees.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employees/{employee_id}:
+    get:
+      operationId: getEmployee
+      tags: [Employees]
+      summary: Get an employee
+      description: Retrieves employee data for a specific employee.
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '200':
+          description: The requested employee.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /trainings:
+    get:
+      operationId: listTrainings
+      tags: [Trainings]
+      summary: List trainings
+      description: Returns all trainings associated with the company.
+      responses:
+        '200':
+          description: A list of trainings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Training'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trainings/{training_id}:
+    get:
+      operationId: getTraining
+      tags: [Trainings]
+      summary: Get a training
+      description: Returns data for a specific training.
+      parameters:
+        - $ref: '#/components/parameters/TrainingId'
+      responses:
+        '200':
+          description: The requested training.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /trainings/assign:
+    post:
+      operationId: assignTraining
+      tags: [Trainings]
+      summary: Assign a training to employees
+      description: >-
+        Assigns a training to one or more employees. Requires the training id
+        and a list of employee ids. Optionally alerts the assigned employees.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [training_id, employee_ids]
+              properties:
+                training_id:
+                  type: string
+                  description: The id of the training to assign.
+                employee_ids:
+                  type: array
+                  description: The ids of the employees to assign the training to.
+                  items:
+                    type: string
+                alert_employees:
+                  type: boolean
+                  default: true
+                  description: >-
+                    Whether to alert the assigned employees. Defaults to true.
+      responses:
+        '200':
+          description: The training was assigned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employee_trainings:
+    get:
+      operationId: listEmployeeTrainings
+      tags: [Employee Trainings]
+      summary: List employee trainings
+      description: Returns all employee-training objects in the company.
+      responses:
+        '200':
+          description: A list of employee-training records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmployeeTraining'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employee_trainings/{employee_training_id}:
+    get:
+      operationId: getEmployeeTraining
+      tags: [Employee Trainings]
+      summary: Get an employee training
+      description: Returns a specific employee-training instance.
+      parameters:
+        - $ref: '#/components/parameters/EmployeeTrainingId'
+      responses:
+        '200':
+          description: The requested employee-training record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeTraining'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateEmployeeTraining
+      tags: [Employee Trainings]
+      summary: Update an employee training
+      description: >-
+        Updates an employee-training record's completion. Supports
+        completion_status (boolean) and completion_rate (0-100). Note:
+        completion_status overrides completion_rate to 100.
+      parameters:
+        - $ref: '#/components/parameters/EmployeeTrainingId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completion_status:
+                  type: boolean
+                  description: >-
+                    Whether the training is complete. When true, overrides
+                    completion_rate to 100.
+                completion_rate:
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                  description: Completion percentage from 0 to 100.
+      responses:
+        '200':
+          description: The updated employee-training record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeTraining'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API key generated in Haekka account settings, passed as
+        `Authorization: Bearer {key}`.
+  parameters:
+    EmployeeId:
+      name: employee_id
+      in: path
+      required: true
+      description: The id of the employee.
+      schema:
+        type: string
+    TrainingId:
+      name: training_id
+      in: path
+      required: true
+      description: The id of the training.
+      schema:
+        type: string
+    EmployeeTrainingId:
+      name: employee_training_id
+      in: path
+      required: true
+      description: The id of the employee-training record.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required fields.
+  schemas:
+    Employee:
+      type: object
+      description: An active employee in the company.
+      properties:
+        id:
+          type: string
+          description: The unique id of the employee.
+      additionalProperties: true
+    Training:
+      type: object
+      description: A training course configured for the company.
+      properties:
+        id:
+          type: string
+          description: The unique id of the training.
+      additionalProperties: true
+    EmployeeTraining:
+      type: object
+      description: A per-employee training assignment and its completion state.
+      properties:
+        id:
+          type: string
+          description: The unique id of the employee-training record.
+        employee_id:
+          type: string
+          description: The id of the associated employee.
+        training_id:
+          type: string
+          description: The id of the associated training.
+        completion_status:
+          type: boolean
+          description: Whether the training is complete.
+        completion_rate:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Completion percentage from 0 to 100.
+      additionalProperties: true
+security:
+  - bearerAuth: []

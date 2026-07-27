@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/haekka-public-api-openapi.yml
+skills:
+  - file: haekka-assign-training.md
+    name: Assign a training to employees
+    api: openapi/haekka-public-api-openapi.yml
+    operations: [listTrainings, listEmployees, assignTraining]
+  - file: haekka-sync-training-completion.md
+    name: Sync employee training completion
+    api: openapi/haekka-public-api-openapi.yml
+    operations: [listEmployeeTrainings, getEmployeeTraining, updateEmployeeTraining]

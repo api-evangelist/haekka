@@ -1,0 +1,55 @@
+arazzo: 1.0.1
+info:
+  title: Assign a Haekka training to employees
+  version: 1.0.0
+  summary: List trainings and active employees, then assign a training and confirm the assignment.
+sourceDescriptions:
+  - name: haekkaApi
+    url: ../openapi/haekka-public-api-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: assignTrainingToEmployees
+    summary: Select a training, select employees, assign the training, and verify.
+    description: >-
+      Pulls the list of trainings and active employees, assigns a chosen
+      training to chosen employees, then lists employee-training records to
+      confirm the assignment took effect.
+    inputs:
+      type: object
+      properties:
+        training_id:
+          type: string
+          description: The training to assign (from listTrainings).
+        employee_ids:
+          type: array
+          items:
+            type: string
+          description: The employees to assign the training to.
+        alert_employees:
+          type: boolean
+          default: true
+    steps:
+      - stepId: listTrainings
+        operationId: listTrainings
+        successCriteria:
+          - condition: $statusCode == 200
+      - stepId: listEmployees
+        operationId: listEmployees
+        successCriteria:
+          - condition: $statusCode == 200
+      - stepId: assignTraining
+        operationId: assignTraining
+        requestBody:
+          contentType: application/json
+          payload:
+            training_id: $inputs.training_id
+            employee_ids: $inputs.employee_ids
+            alert_employees: $inputs.alert_employees
+        successCriteria:
+          - condition: $statusCode == 200
+      - stepId: verifyAssignment
+        operationId: listEmployeeTrainings
+        successCriteria:
+          - condition: $statusCode == 200
+    outputs:
+      employee_trainings: $steps.verifyAssignment.response.body

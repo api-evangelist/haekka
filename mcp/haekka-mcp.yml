@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/haekka-public-api-openapi.yml
+note: >-
+  No official hosted/remote Haekka MCP server was found. This is a DERIVED
+  candidate tool list mapping each documented Public API operation to a tool.
+  Because no real server exists, NO MCPServer canonical pointer is emitted in
+  apis.yml (candidate only; do not score as a live server).
+server:
+  name: haekka
+  transport: http
+tools:
+  - name: list_employees
+    description: List all active employees in the company.
+    source_operation: openapi/haekka-public-api-openapi.yml#listEmployees
+  - name: get_employee
+    description: Retrieve a specific employee.
+    source_operation: openapi/haekka-public-api-openapi.yml#getEmployee
+  - name: list_trainings
+    description: List all trainings for the company.
+    source_operation: openapi/haekka-public-api-openapi.yml#listTrainings
+  - name: get_training
+    description: Retrieve a specific training.
+    source_operation: openapi/haekka-public-api-openapi.yml#getTraining
+  - name: assign_training
+    description: Assign a training to one or more employees.
+    source_operation: openapi/haekka-public-api-openapi.yml#assignTraining
+  - name: list_employee_trainings
+    description: List all employee-training records.
+    source_operation: openapi/haekka-public-api-openapi.yml#listEmployeeTrainings
+  - name: get_employee_training
+    description: Retrieve a specific employee-training record.
+    source_operation: openapi/haekka-public-api-openapi.yml#getEmployeeTraining
+  - name: update_employee_training
+    description: Update completion state on an employee-training record.
+    source_operation: openapi/haekka-public-api-openapi.yml#updateEmployeeTraining
