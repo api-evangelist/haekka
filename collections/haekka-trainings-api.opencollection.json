@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Haekka Public Employee Trainings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trainings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List trainings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.haekka.com/api/public/trainings"
+          },
+          "docs": "Returns all trainings associated with the company."
+        },
+        {
+          "info": {
+            "name": "Get a training",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.haekka.com/api/public/trainings/:training_id",
+            "params": [
+              {
+                "name": "training_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the training."
+              }
+            ]
+          },
+          "docs": "Returns data for a specific training."
+        },
+        {
+          "info": {
+            "name": "Assign a training to employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.haekka.com/api/public/trainings/assign",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a training to one or more employees. Requires the training id and a list of employee ids. Optionally alerts the assigned employees."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

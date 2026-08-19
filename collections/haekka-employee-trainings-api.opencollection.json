@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Haekka Public Employee Trainings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee Trainings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List employee trainings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.haekka.com/api/public/employee_trainings"
+          },
+          "docs": "Returns all employee-training objects in the company."
+        },
+        {
+          "info": {
+            "name": "Get an employee training",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.haekka.com/api/public/employee_trainings/:employee_training_id",
+            "params": [
+              {
+                "name": "employee_training_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the employee-training record."
+              }
+            ]
+          },
+          "docs": "Returns a specific employee-training instance."
+        },
+        {
+          "info": {
+            "name": "Update an employee training",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.haekka.com/api/public/employee_trainings/:employee_training_id",
+            "params": [
+              {
+                "name": "employee_training_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the employee-training record."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an employee-training record's completion. Supports completion_status (boolean) and completion_rate (0-100). Note: completion_status overrides completion_rate to 100."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
