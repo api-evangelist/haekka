@@ -45,6 +45,16 @@ tags:
 - Employee Training
 - HIPAA
 - SOC 2
+tags_raw:
+- Company
+- Security Awareness Training
+- Compliance Training
+- Microlearning
+- Slack
+- Phishing Simulation
+- Employee Training
+- HIPAA
+- SOC 2
 - API
 apis:
 - aid: haekka:haekka-employee-trainings-api
