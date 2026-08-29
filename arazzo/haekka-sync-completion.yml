@@ -4,55 +4,55 @@ info:
   version: 1.0.0
   summary: Read an employee-training record and update its completion state, then confirm.
 sourceDescriptions:
-  - name: haekkaApi
-    url: ../openapi/haekka-public-api-openapi.yml
-    type: openapi
+- name: employeeTrainingsApi
+  url: ../openapi/haekka-employee-trainings-api-openapi.yml
+  type: openapi
 workflows:
-  - workflowId: syncEmployeeTrainingCompletion
-    summary: Read a record, update completion, and re-read to confirm.
-    description: >-
-      Fetches a single employee-training record, updates its completion status
-      or rate, then re-reads it to confirm the new completion state.
-    inputs:
-      type: object
-      properties:
-        employee_training_id:
-          type: string
-        completion_status:
-          type: boolean
-        completion_rate:
-          type: integer
-          minimum: 0
-          maximum: 100
-    steps:
-      - stepId: readRecord
-        operationId: getEmployeeTraining
-        parameters:
-          - name: employee_training_id
-            in: path
-            value: $inputs.employee_training_id
-        successCriteria:
-          - condition: $statusCode == 200
-      - stepId: updateRecord
-        operationId: updateEmployeeTraining
-        parameters:
-          - name: employee_training_id
-            in: path
-            value: $inputs.employee_training_id
-        requestBody:
-          contentType: application/json
-          payload:
-            completion_status: $inputs.completion_status
-            completion_rate: $inputs.completion_rate
-        successCriteria:
-          - condition: $statusCode == 200
-      - stepId: confirmRecord
-        operationId: getEmployeeTraining
-        parameters:
-          - name: employee_training_id
-            in: path
-            value: $inputs.employee_training_id
-        successCriteria:
-          - condition: $statusCode == 200
-    outputs:
-      record: $steps.confirmRecord.response.body
+- workflowId: syncEmployeeTrainingCompletion
+  summary: Read a record, update completion, and re-read to confirm.
+  description: >-
+    Fetches a single employee-training record, updates its completion status
+    or rate, then re-reads it to confirm the new completion state.
+  inputs:
+    type: object
+    properties:
+      employee_training_id:
+        type: string
+      completion_status:
+        type: boolean
+      completion_rate:
+        type: integer
+        minimum: 0
+        maximum: 100
+  steps:
+  - stepId: readRecord
+    operationId: getEmployeeTraining
+    parameters:
+    - name: employee_training_id
+      in: path
+      value: $inputs.employee_training_id
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: updateRecord
+    operationId: updateEmployeeTraining
+    parameters:
+    - name: employee_training_id
+      in: path
+      value: $inputs.employee_training_id
+    requestBody:
+      contentType: application/json
+      payload:
+        completion_status: $inputs.completion_status
+        completion_rate: $inputs.completion_rate
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmRecord
+    operationId: getEmployeeTraining
+    parameters:
+    - name: employee_training_id
+      in: path
+      value: $inputs.employee_training_id
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    record: $steps.confirmRecord.response.body
