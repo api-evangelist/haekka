@@ -25,15 +25,16 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Unknown
+  confidence: low
   source:
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://cdn.prod.website-files.com/63614de03f02a69460a3de25/63614e1362ff9e6729e56195_HKA--logo-color-white.svg
 url: https://raw.githubusercontent.com/api-evangelist/haekka/refs/heads/main/apis.yml
@@ -105,8 +106,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/haekka-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: Overlay
   url: overlays/haekka-public-api-overlay.yaml
 - type: Website
