@@ -2,7 +2,12 @@ generated: '2026-07-19'
 method: searched
 source: probed /.well-known/ on haekka.com
 host: https://haekka.com
-documents:
+note: No /.well-known/ discovery documents are published. Absence is valid recorded data; no WellKnown/SecurityTxt
+  canonical pointer is emitted. Haekka does publish a human security page at https://www.haekka.com/security
+  (see security/haekka-vulnerability-disclosure.yml) but not an RFC 9116 security.txt.
+hosts:
+- host: https://haekka.com
+  documents:
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
@@ -13,8 +18,8 @@ documents:
     status: 404
   - path: /.well-known/ai-plugin.json
     status: 404
-note: >-
-  No /.well-known/ discovery documents are published. Absence is valid recorded
-  data; no WellKnown/SecurityTxt canonical pointer is emitted. Haekka does
-  publish a human security page at https://www.haekka.com/security (see
-  security/haekka-vulnerability-disclosure.yml) but not an RFC 9116 security.txt.
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
