@@ -96,13 +96,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication is missing or the API key is invalid.
-    NotFound:
-      description: The requested resource was not found.
-    BadRequest:
-      description: The request was malformed or missing required fields.
   schemas:
     Training:
       type: object
@@ -120,6 +113,13 @@ components:
       description: The id of the training.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+    BadRequest:
+      description: The request was malformed or missing required fields.
   securitySchemes:
     bearerAuth:
       type: http
