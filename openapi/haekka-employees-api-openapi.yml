@@ -60,6 +60,11 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
     Employee:
       type: object
@@ -77,11 +82,6 @@ components:
       description: The id of the employee.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication is missing or the API key is invalid.
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
