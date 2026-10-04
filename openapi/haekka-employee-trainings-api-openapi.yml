@@ -96,13 +96,21 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    EmployeeTrainingId:
+      name: employee_training_id
+      in: path
+      required: true
+      description: The id of the employee-training record.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Authentication is missing or the API key is invalid.
-    NotFound:
-      description: The requested resource was not found.
     BadRequest:
       description: The request was malformed or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
     EmployeeTraining:
       type: object
@@ -126,14 +134,6 @@ components:
           maximum: 100
           description: Completion percentage from 0 to 100.
       additionalProperties: true
-  parameters:
-    EmployeeTrainingId:
-      name: employee_training_id
-      in: path
-      required: true
-      description: The id of the employee-training record.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

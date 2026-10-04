@@ -61,10 +61,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Authentication is missing or the API key is invalid.
     NotFound:
       description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
+  parameters:
+    EmployeeId:
+      name: employee_id
+      in: path
+      required: true
+      description: The id of the employee.
+      schema:
+        type: string
   schemas:
     Employee:
       type: object
@@ -74,14 +82,6 @@ components:
           type: string
           description: The unique id of the employee.
       additionalProperties: true
-  parameters:
-    EmployeeId:
-      name: employee_id
-      in: path
-      required: true
-      description: The id of the employee.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
