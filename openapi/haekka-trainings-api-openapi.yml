@@ -114,12 +114,12 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication is missing or the API key is invalid.
-    BadRequest:
-      description: The request was malformed or missing required fields.
     NotFound:
       description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required fields.
+    Unauthorized:
+      description: Authentication is missing or the API key is invalid.
   securitySchemes:
     bearerAuth:
       type: http
