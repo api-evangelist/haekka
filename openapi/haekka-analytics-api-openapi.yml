@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Snippets Analytics API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Analytics
+paths:
+  /analytics/{employee_id}/{campaign_attack_id}/{nonce}/cleardot:
+    parameters:
+    - name: campaign_attack_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: nonce
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: analytics_cleardot_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Analytics
+      summary: Analytics cleardot list
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

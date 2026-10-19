@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Get Employees In Stream API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Get Employees In Stream
+paths:
+  /api/get_employees_in_stream:
+    parameters: []
+    post:
+      operationId: api_get_employees_in_stream_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Get Employees In Stream
+      summary: Api get employees in stream create
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

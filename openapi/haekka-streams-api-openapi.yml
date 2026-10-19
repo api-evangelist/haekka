@@ -1,0 +1,636 @@
+openapi: 3.2.0
+info:
+  title: Snippets Streams API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Streams
+paths:
+  /api/streams/:
+    parameters: []
+    get:
+      operationId: api_streams_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Stream'
+      tags:
+      - Streams
+      summary: Api streams list
+      x-summary-source: derived
+    post:
+      operationId: api_streams_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stream'
+        required: true
+      summary: Api streams create
+      x-summary-source: derived
+  /api/streams/categories:
+    parameters: []
+    get:
+      operationId: api_streams_categories_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StreamPostCategory'
+      tags:
+      - Streams
+      summary: Api streams categories list
+      x-summary-source: derived
+    post:
+      operationId: api_streams_categories_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamPostCategory'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPostCategory'
+        required: true
+      summary: Api streams categories create
+      x-summary-source: derived
+  /api/streams/posts:
+    parameters: []
+    get:
+      operationId: api_streams_posts_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StreamPost'
+      tags:
+      - Streams
+      summary: Api streams posts list
+      x-summary-source: derived
+    post:
+      operationId: api_streams_posts_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamPostWrite'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPostWrite'
+        required: true
+      summary: Api streams posts create
+      x-summary-source: derived
+  /api/streams/posts/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Stream Post.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_streams_posts_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamPost'
+      tags:
+      - Streams
+      summary: Api streams posts read
+      x-summary-source: derived
+    put:
+      operationId: api_streams_posts_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamPostWrite'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPostWrite'
+        required: true
+      summary: Api streams posts update
+      x-summary-source: derived
+    patch:
+      operationId: api_streams_posts_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamPostWrite'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPostWrite'
+        required: true
+      summary: Api streams posts partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_streams_posts_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Streams
+      summary: Api streams posts delete
+      x-summary-source: derived
+  /api/streams/posts/{id}/update:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_streams_posts_update_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Streams
+      summary: Api streams posts update create
+      x-summary-source: derived
+  /api/streams/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Stream.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_streams_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+      tags:
+      - Streams
+      summary: Api streams read
+      x-summary-source: derived
+    put:
+      operationId: api_streams_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stream'
+        required: true
+      summary: Api streams update
+      x-summary-source: derived
+    patch:
+      operationId: api_streams_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+      tags:
+      - Streams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stream'
+        required: true
+      summary: Api streams partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_streams_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Streams
+      summary: Api streams delete
+      x-summary-source: derived
+components:
+  schemas:
+    StreamPostCategory:
+      required:
+      - title
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        title:
+          title: Title
+          type: string
+          maxLength: 60
+          minLength: 1
+    Stream:
+      required:
+      - title
+      - icon_url
+      - description
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        title:
+          title: Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        icon_url:
+          title: Icon URL
+          type: string
+          maxLength: 300
+          minLength: 1
+        description:
+          title: Description
+          type: string
+          minLength: 1
+        is_free:
+          title: Is Free Stream
+          type: boolean
+    RichTextEditorState:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        editor_state:
+          title: Stringified Editor state
+          type:
+          - string
+          - 'null'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentImage'
+    ContentImage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        image_name:
+          title: Image Name
+          type:
+          - string
+          - 'null'
+          maxLength: 200
+        image_url:
+          title: Image url
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        image_url_public:
+          title: Image url public
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        editor_content:
+          title: Editor Content
+          type:
+          - string
+          - 'null'
+          format: uuid
+    StreamPostWrite:
+      required:
+      - title
+      - stream
+      - post_content
+      - editor_content
+      - stream_post_category
+      type: object
+      properties:
+        title:
+          title: Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        stream:
+          title: Parent Stream
+          type: string
+          format: uuid
+        video_url:
+          title: Video ULR
+          type:
+          - string
+          - 'null'
+          maxLength: 300
+        post_content:
+          title: Post content
+          type: string
+          minLength: 1
+        editor_content:
+          $ref: '#/components/schemas/RichTextEditorState'
+        send_to_admins_only:
+          title: Send To Admins Only
+          type: boolean
+        send_time:
+          title: Send time
+          type:
+          - string
+          - 'null'
+          format: date-time
+        send_now:
+          title: Send Now
+          type: boolean
+        is_sent:
+          title: Is Sent
+          type: boolean
+        acknowledge_button:
+          title: Acknowledge Button
+          type: boolean
+        include_rating:
+          title: Include Rating
+          type: boolean
+        is_editable:
+          title: Is Editable (by Admins)
+          type: boolean
+        stream_post_category:
+          $ref: '#/components/schemas/StreamPostCategory'
+    StreamPost:
+      required:
+      - title
+      - post_content
+      - stream
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        category:
+          $ref: '#/components/schemas/StreamPostCategory'
+        editor_content:
+          $ref: '#/components/schemas/RichTextEditorState'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        video_url:
+          title: Video ULR
+          type:
+          - string
+          - 'null'
+          maxLength: 300
+        post_content:
+          title: Post content
+          type: string
+          minLength: 1
+        send_to_admins_only:
+          title: Send To Admins Only
+          type: boolean
+        send_time:
+          title: Send time
+          type:
+          - string
+          - 'null'
+          format: date-time
+        send_now:
+          title: Send Now
+          type: boolean
+        is_sent:
+          title: Is Sent
+          type: boolean
+        acknowledge_button:
+          title: Acknowledge Button
+          type: boolean
+        include_rating:
+          title: Include Rating
+          type: boolean
+        is_editable:
+          title: Is Editable (by Admins)
+          type: boolean
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        stream:
+          title: Parent Stream
+          type: string
+          format: uuid
+        stream_post_category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          format: uuid
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

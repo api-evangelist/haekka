@@ -1,0 +1,5466 @@
+openapi: 3.2.0
+info:
+  title: Snippets Companies API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Companies
+paths:
+  /api/companies/installations:
+    parameters: []
+    post:
+      operationId: api_companies_installations_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackInstallation'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackInstallation'
+        required: true
+      summary: Api companies installations create
+      x-summary-source: derived
+  /api/companies/installations/check/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_installations_check_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies installations check read
+      x-summary-source: derived
+  /api/companies/installations/{team_id}:
+    parameters:
+    - name: team_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_installations_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackInstallation'
+      tags:
+      - Companies
+      summary: Api companies installations read
+      x-summary-source: derived
+  /api/companies/sync/check/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_sync_check_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies sync check read
+      x-summary-source: derived
+  /api/companies/sync/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_sync_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies sync create
+      x-summary-source: derived
+  /api/companies/{company_id}/subscription-url:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_subscription-url_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies subscription url list
+      x-summary-source: derived
+  /api/companies/{id}/employee/top:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_employee_top_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopPerformer'
+      tags:
+      - Companies
+      summary: Api companies employee top list
+      x-summary-source: derived
+  /api/companies/{id}/employees/curriculums/{curriculum_id}:
+    parameters:
+    - name: curriculum_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_employees_curriculums_read
+      description: 'This endpoint returns a list of EmployeeTraining,
+
+        filtering by company and training.'
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmployeeTrainingManageList'
+      tags:
+      - Companies
+      summary: Api companies employees curriculums read
+      x-summary-source: derived
+  /api/companies/{id}/employees/list:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_employees_list_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmployeeManageList'
+      tags:
+      - Companies
+      summary: Api companies employees list list
+      x-summary-source: derived
+  /api/companies/{id}/employees/{employee_id}:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: api_companies_employees_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies employees delete
+      x-summary-source: derived
+  /api/companies/{id}/employees/{employee_id}/admin:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      operationId: api_companies_employees_admin_update
+      description: Update employee admin status. Requires admin privileges and company access.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      summary: Api companies employees admin update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_employees_admin_partial_update
+      description: Update employee admin status. Requires admin privileges and company access.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      summary: Api companies employees admin partial update
+      x-summary-source: derived
+  /api/companies/{id}/engagements/metrics:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_engagements_metrics_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies engagements metrics list
+      x-summary-source: derived
+  /api/companies/{id}/evdt/analytics/action:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_evdt_analytics_action_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies evdt analytics action list
+      x-summary-source: derived
+  /api/companies/{id}/evdt/analytics/event:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_evdt_analytics_event_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies evdt analytics event list
+      x-summary-source: derived
+  /api/companies/{id}/groups:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_groups_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+      tags:
+      - Companies
+      summary: Api companies groups list
+      x-summary-source: derived
+    post:
+      operationId: api_companies_groups_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      summary: Api companies groups create
+      x-summary-source: derived
+  /api/companies/{id}/groups/{group_id}:
+    parameters:
+    - name: group_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_groups_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+      tags:
+      - Companies
+      summary: Api companies groups read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_groups_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      summary: Api companies groups update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_groups_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies groups delete
+      x-summary-source: derived
+  /api/companies/{id}/groups/{group_id}/members/list:
+    parameters:
+    - name: group_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_groups_members_list_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GroupMember'
+      tags:
+      - Companies
+      summary: Api companies groups members list list
+      x-summary-source: derived
+  /api/companies/{id}/home:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_home_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyHomeData'
+      tags:
+      - Companies
+      summary: Api companies home list
+      x-summary-source: derived
+  /api/companies/{id}/integrations:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_integrations_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyIntegrations'
+      tags:
+      - Companies
+      summary: Api companies integrations list
+      x-summary-source: derived
+  /api/companies/{id}/merge/delete/{integration}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: api_companies_merge_delete_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies merge delete delete
+      x-summary-source: derived
+  /api/companies/{id}/merge/update:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    patch:
+      operationId: api_companies_merge_update_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies merge update partial update
+      x-summary-source: derived
+  /api/companies/{id}/notifications/get:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this notification.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_companies_notifications_get_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notifications'
+      tags:
+      - Companies
+      summary: Api companies notifications get list
+      x-summary-source: derived
+  /api/companies/{id}/notifications/schedule:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_notifications_schedule_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyNotificationSchedule'
+      tags:
+      - Companies
+      summary: Api companies notifications schedule list
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_notifications_schedule_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyNotificationSchedule'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyNotificationSchedule'
+        required: true
+      summary: Api companies notifications schedule partial update
+      x-summary-source: derived
+  /api/companies/{id}/notifications/update/:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    patch:
+      operationId: api_companies_notifications_update_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies notifications update partial update
+      x-summary-source: derived
+  /api/companies/{id}/phishing/attacks/{phishing_attack_id}/report:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: phishing_attack_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_attacks_report_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing attacks report list
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_campaigns_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingCampaign'
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns list
+      x-summary-source: derived
+    post:
+      operationId: api_companies_phishing_campaigns_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaign'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCampaign'
+        required: true
+      summary: Api companies phishing campaigns create
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/actions:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this phishing campaign action.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_companies_phishing_campaigns_actions_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingCampaignAction'
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns actions list
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/attacks:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_campaigns_attacks_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaignAttack'
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns attacks read
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/delete:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: api_companies_phishing_campaigns_delete_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns delete delete
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/details:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_campaigns_details_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaign'
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns details read
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/details/table:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_campaigns_details_table_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns details table list
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/details/{employee_id}:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getApiCompaniesByIdPhishingCampaignsByCampaignIdDetailsByEmployeeId
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns details read
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: api_companies_phishing_campaigns_details_read
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/edit:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      operationId: api_companies_phishing_campaigns_edit_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaign'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCampaign'
+        required: true
+      summary: Api companies phishing campaigns edit update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_phishing_campaigns_edit_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaign'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCampaign'
+        required: true
+      summary: Api companies phishing campaigns edit partial update
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/employees:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_campaigns_employees_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MinimalEmployee'
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns employees list
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/launch:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_phishing_campaigns_launch_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaignAttack'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCampaignAttack'
+        required: true
+      summary: Api companies phishing campaigns launch create
+      x-summary-source: derived
+  /api/companies/{id}/phishing/campaigns/{campaign_id}/remove/{employee_id}:
+    parameters:
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: api_companies_phishing_campaigns_remove_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing campaigns remove delete
+      x-summary-source: derived
+  /api/companies/{id}/phishing/metrics:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_metrics_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing metrics list
+      x-summary-source: derived
+  /api/companies/{id}/phishing/settings:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_settings_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingCompanySettings'
+      tags:
+      - Companies
+      summary: Api companies phishing settings list
+      x-summary-source: derived
+    put:
+      operationId: api_companies_phishing_settings_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCompanySettings'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCompanySettings'
+        required: true
+      summary: Api companies phishing settings update
+      x-summary-source: derived
+  /api/companies/{id}/phishing/whitelist/{template_id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: template_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_phishing_whitelist_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing whitelist read
+      x-summary-source: derived
+    post:
+      operationId: api_companies_phishing_whitelist_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies phishing whitelist create
+      x-summary-source: derived
+  /api/companies/{id}/report:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_report_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies report read
+      x-summary-source: derived
+  /api/companies/{id}/slack-groups:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_slack-groups_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies slack groups list
+      x-summary-source: derived
+  /api/companies/{id}/stats:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_stats_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrainingStats'
+      tags:
+      - Companies
+      summary: Api companies stats list
+      x-summary-source: derived
+  /api/companies/{id}/streams/{stream_id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: stream_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_streams_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStream'
+      tags:
+      - Companies
+      summary: Api companies streams read
+      x-summary-source: derived
+  /api/companies/{id}/streams/{stream_id}/posts:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: stream_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_streams_posts_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyStreamPostWithStatistics'
+      tags:
+      - Companies
+      summary: Api companies streams posts list
+      x-summary-source: derived
+  /api/companies/{id}/streams/{stream_id}/posts/{post_id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: post_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: stream_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_streams_posts_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStreamPost'
+      tags:
+      - Companies
+      summary: Api companies streams posts read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_streams_posts_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStreamPost'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyStreamPost'
+        required: true
+      summary: Api companies streams posts update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_streams_posts_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStreamPost'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyStreamPost'
+        required: true
+      summary: Api companies streams posts partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_streams_posts_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies streams posts delete
+      x-summary-source: derived
+  /api/companies/{id}/streams/{stream}/subscribe:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: stream
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      operationId: api_companies_streams_subscribe_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStream'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyStream'
+        required: true
+      summary: Api companies streams subscribe update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_streams_subscribe_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStream'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyStream'
+        required: true
+      summary: Api companies streams subscribe partial update
+      x-summary-source: derived
+  /api/companies/{id}/tokens/delete:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: api_companies_tokens_delete_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies tokens delete delete
+      x-summary-source: derived
+  /api/companies/{id}/tokens/generate:
+    parameters:
+    - name: id
+      in: path
+      description: A unique value identifying this Company API key.
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_tokens_generate_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies tokens generate create
+      x-summary-source: derived
+  /api/companies/{id}/tokens/get:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_tokens_get_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyAPIKey'
+      tags:
+      - Companies
+      summary: Api companies tokens get list
+      x-summary-source: derived
+  /api/companies/{id}/trainings:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrainingSerializerCompany'
+      tags:
+      - Companies
+      summary: Api companies trainings list
+      x-summary-source: derived
+    post:
+      operationId: createCompanyTrainingBasedOnEditableCurriculum
+      description: Many trainings are created as there are curriculums for type of course.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '404':
+          description: Not found
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                curriculum:
+                  description: UUID of Curriculum you want to create Training from. Must be editable (is_editable=True)
+                  type: string
+                created_by:
+                  description: UUID of admin employee that's creating a company Training
+                  type: string
+                start_date:
+                  description: Start date of company Training
+                  type: string
+                end_date:
+                  description: End date of company Training
+                  type: string
+                renew_date:
+                  description: Renew date of company Training
+                  type: string
+                renew_cycle:
+                  description: 'At what interval will company Training be renews. Can be one of the following values: ''none'', ''quarterly'', ''semi-annual'', ''annual''.'
+                  type: string
+        required: true
+      summary: Create company training based on editable curriculum
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: create company training based on editable curriculum
+  /api/companies/{id}/trainings/list:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_list_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListTranignsSerializers'
+      tags:
+      - Companies
+      summary: Api companies trainings list list
+      x-summary-source: derived
+  /api/companies/{id}/trainings/renewed/{curriculum_id}:
+    parameters:
+    - name: curriculum_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_renewed_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RenewedTraining'
+      tags:
+      - Companies
+      summary: Api companies trainings renewed read
+      x-summary-source: derived
+    post:
+      operationId: api_companies_trainings_renewed_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenewedTraining'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenewedTraining'
+        required: true
+      summary: Api companies trainings renewed create
+      x-summary-source: derived
+  /api/companies/{id}/trainings/tags:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_tags_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrainingTag'
+      tags:
+      - Companies
+      summary: Api companies trainings tags list
+      x-summary-source: derived
+  /api/companies/{id}/trainings/tags/{tag_id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: tag_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_tags_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingTag'
+      tags:
+      - Companies
+      summary: Api companies trainings tags read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_trainings_tags_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingTag'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingTag'
+        required: true
+      summary: Api companies trainings tags update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_trainings_tags_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingTag'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingTag'
+        required: true
+      summary: Api companies trainings tags partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_trainings_tags_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies trainings tags delete
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this training.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_read
+      description: To create a training you have to be an admin
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+      tags:
+      - Companies
+      summary: Api companies trainings read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_trainings_update
+      description: To create a training you have to be an admin
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Training'
+        required: true
+      summary: Api companies trainings update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_trainings_partial_update
+      description: To create a training you have to be an admin
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Training'
+        required: true
+      summary: Api companies trainings partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_trainings_delete
+      description: To create a training you have to be an admin
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies trainings delete
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/before:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this training.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_before_read
+      description: Get Training Before Edit
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingGetBeforeEdit'
+      tags:
+      - Companies
+      summary: Api companies trainings before read
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/lessons:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_lessons_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingList'
+      tags:
+      - Companies
+      summary: Api companies trainings lessons read
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/migrate-training:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_trainings_migrate-training_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies trainings migrate training create
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/publish:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this training.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_trainings_publish_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Training'
+        required: true
+      summary: Api companies trainings publish create
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/renew:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this training.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_trainings_renew_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Training'
+        required: true
+      summary: Api companies trainings renew create
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/renew-approve-migration:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_trainings_renew-approve-migration_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MigrateCurriculumOnTrainingRenew'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrateCurriculumOnTrainingRenew'
+        required: true
+      summary: Api companies trainings renew approve migration create
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/statistics:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_statistics_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingStatistics'
+      tags:
+      - Companies
+      summary: Api companies trainings statistics read
+      x-summary-source: derived
+  /api/companies/{id}/trainings/{training_id}/{employee_id}/getevidence:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: training_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_trainings_getevidence_list
+      description: 'This endpoint generates an excel with the data of the
+
+        employees with training completed in the company.'
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies trainings getevidence list
+      x-summary-source: derived
+  /api/companies/{id}/users_settings:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_users_settings_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccountsSettings'
+      tags:
+      - Companies
+      summary: Api companies users settings read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_users_settings_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccountsSettings'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAccountsSettings'
+        required: true
+      summary: Api companies users settings update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_users_settings_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccountsSettings'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAccountsSettings'
+        required: true
+      summary: Api companies users settings partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_users_settings_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies users settings delete
+      x-summary-source: derived
+  /api/companies/{id}/workflows:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_workflows_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkflowList'
+      tags:
+      - Companies
+      summary: Api companies workflows list
+      x-summary-source: derived
+    post:
+      operationId: api_companies_workflows_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowList'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowList'
+        required: true
+      summary: Api companies workflows create
+      x-summary-source: derived
+  /api/companies/{id}/workflows/{workflow_id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workflow_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_companies_workflows_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+      - Companies
+      summary: Api companies workflows read
+      x-summary-source: derived
+    put:
+      operationId: api_companies_workflows_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workflow'
+        required: true
+      summary: Api companies workflows update
+      x-summary-source: derived
+    patch:
+      operationId: api_companies_workflows_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+      - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workflow'
+        required: true
+      summary: Api companies workflows partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_companies_workflows_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies workflows delete
+      x-summary-source: derived
+  /api/companies/{id}/workflows/{workflow_id}/assign:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workflow_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_workflows_assign_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies workflows assign create
+      x-summary-source: derived
+  /api/companies/{id}/workflows/{workflow_id}/assign/all:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workflow_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_companies_workflows_assign_all_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Companies
+      summary: Api companies workflows assign all create
+      x-summary-source: derived
+components:
+  schemas:
+    QuestionAnswer:
+      required:
+      - answer
+      - lesson_question
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        answer:
+          title: Answer
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          maxLength: 150
+          minLength: 1
+        correct:
+          title: Correct
+          type: boolean
+        position:
+          title: Order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        lesson_question:
+          title: Lesson question
+          type: string
+          format: uuid
+        next_lesson:
+          title: Next lesson
+          type:
+          - string
+          - 'null'
+          format: uuid
+        explanation:
+          title: Answer Explanation
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+    TrainingGetBeforeEdit:
+      required:
+      - renew_date
+      - curriculum_title
+      - employees
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        annual:
+          title: Annual
+          type: boolean
+          readOnly: true
+        start_date:
+          title: Start date
+          type: string
+          format: date-time
+          readOnly: true
+        end_date:
+          title: End date
+          type: string
+          format: date-time
+          readOnly: true
+        renew_date:
+          title: Renew date
+          type: string
+          format: date
+        days_till_due:
+          title: Days till due
+          type: number
+          readOnly: true
+        curriculum_title:
+          title: Curriculum title
+          type: string
+          minLength: 1
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeGetBeforeEditTraining'
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+          readOnly: true
+    RichTextEditorState:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        editor_state:
+          title: Stringified Editor state
+          type:
+          - string
+          - 'null'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentImage'
+    GroupMember:
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          maxLength: 80
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        avatar_image:
+          title: Avatar Image
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+    DoceboTrainingConnector:
+      required:
+      - docebo_manager_notifications
+      - course_id
+      - code
+      - uidCourse
+      - title
+      - type
+      - training
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        docebo_manager_notifications:
+          $ref: '#/components/schemas/DoceboTrainingManagerNotifications'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        course_id:
+          title: Course id
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        code:
+          title: Code
+          type: string
+          maxLength: 100
+          minLength: 1
+        uidCourse:
+          title: UidCourse
+          type: string
+          maxLength: 100
+          minLength: 1
+        title:
+          title: Title
+          type: string
+          maxLength: 256
+          minLength: 1
+        type:
+          title: Type
+          type: string
+          maxLength: 100
+          minLength: 1
+        training:
+          title: Training
+          type: string
+          format: uuid
+    PhishingCampaign:
+      required:
+      - name
+      - templates
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        active:
+          title: Active
+          type: boolean
+        name:
+          title: Name
+          type: string
+          maxLength: 30
+          minLength: 1
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhishingTemplate'
+        send_option:
+          title: Send option
+          type:
+          - string
+          - 'null'
+          enum:
+          - once_immediately
+          - randomly_once_every_two_weeks
+          - randomly_once_monthly
+          - randomly_once_quarterly
+          - randomly_once_every_six_months
+          - randomly_once_yearly
+        skip_weekends:
+          title: Skip weekends
+          type: boolean
+        last_sent_date:
+          title: Last sent date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        channels_to_sync:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Channels to sync
+            type: string
+            maxLength: 100
+            minLength: 1
+        slack_auto_enroll:
+          title: Slack auto enroll
+          type:
+          - boolean
+          - 'null'
+    PhishingCampaignAction:
+      required:
+      - employee
+      - attack
+      - action_type
+      - points
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        employee:
+          $ref: '#/components/schemas/MinimalEmployee'
+        attack:
+          $ref: '#/components/schemas/PhishingCampaignAttack'
+        action_type:
+          title: Action type
+          type: string
+          enum:
+          - report_phishing
+          - do_nothing
+          - open_phishing_mail
+          - click_phishing_link
+          - breach_credentials
+          - forwarded_phishing_mail
+        points:
+          title: Points
+          type: integer
+          enum:
+          - 100
+          - 50
+          - 20
+          - 10
+          - 0
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        priority:
+          title: Priority
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 5
+          - 4
+          - 3
+          - 2
+          - 1
+    SlackInstallation:
+      required:
+      - team_id
+      - bot_token
+      - bot_id
+      - bot_user_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        enterprise_id:
+          title: Enterprise id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        team_id:
+          title: Team id
+          type: string
+          maxLength: 255
+          minLength: 1
+        bot_token:
+          title: Bot token
+          type: string
+          maxLength: 1000
+          minLength: 1
+        bot_id:
+          title: Bot id
+          type: string
+          maxLength: 255
+          minLength: 1
+        bot_user_id:
+          title: Bot user id
+          type: string
+          maxLength: 255
+          minLength: 1
+        webhook_channel_name:
+          title: Incoming webhook channel name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        webhook_channel_id:
+          title: Incoming webhook channel id
+          type: string
+          maxLength: 255
+        webhook_configuration_url:
+          title: Incoming webhook configuration url
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        webhook_url:
+          title: Incoming webhook url
+          type: string
+          maxLength: 255
+        is_uninstalled:
+          title: Is uninstalled
+          type: boolean
+        last_install_date:
+          title: Last install date
+          type:
+          - string
+          - 'null'
+          format: date-time
+    TrainingList:
+      required:
+      - curriculum_subtitle
+      - curriculum_title
+      - is_onboarding
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        curriculum_subtitle:
+          title: Curriculum subtitle
+          type: string
+          minLength: 1
+        curriculum_title:
+          title: Curriculum title
+          type: string
+          minLength: 1
+        is_onboarding:
+          title: Is onboarding
+          type: boolean
+        average_length:
+          title: Average length
+          type: string
+          readOnly: true
+    ListTranignsSerializers:
+      required:
+      - title
+      - number_of_lessons
+      - number_of_assessments
+      - assigment_id
+      - due_date
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        employees_assigned:
+          title: Employees assigned
+          type: string
+          readOnly: true
+        employees_completed:
+          title: Employees completed
+          type: string
+          readOnly: true
+        number_of_lessons:
+          title: Number of lessons
+          type: integer
+        number_of_assessments:
+          title: Number of assessments
+          type: integer
+        days_till_due:
+          title: Days till due
+          type:
+          - number
+          - 'null'
+        renew_cycle:
+          title: Renew cycle
+          type: string
+          enum:
+          - none
+          - quarterly
+          - semi-annual
+          - annual
+        assigment_id:
+          title: Assigment id
+          type: string
+          format: uuid
+        due_date:
+          title: Due date
+          type: string
+          format: date-time
+        completed_lessons:
+          title: Completed lessons
+          type: string
+          readOnly: true
+        completed_assessments:
+          title: Completed assessments
+          type: string
+          readOnly: true
+    TrainingStatistics:
+      type: object
+      properties:
+        all_employees_alerted_in_slack:
+          title: All employees alerted in slack
+          type: string
+          readOnly: true
+        employees_without_slack:
+          title: Employees without slack
+          type: string
+          readOnly: true
+    CurriculumType:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Curriculum type name
+          type: string
+          maxLength: 60
+          minLength: 1
+        titles:
+          title: Titles
+          type: string
+          readOnly: true
+    Action:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        payload:
+          title: Payload
+          type: string
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        sentiment:
+          title: Sentiment
+          type: string
+          enum:
+          - negative
+          - neutral
+          - positive
+          readOnly: true
+    Role:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 60
+        technical:
+          title: Technical
+          type: boolean
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+    UserAccountsSettings:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        guest_accounts_included:
+          title: Guest accounts included
+          type: boolean
+        keep_guest_accounts:
+          title: Keep guest accounts in db
+          type: boolean
+        google_auto_sync:
+          title: Auto sync accounts in Google
+          type: boolean
+        delete_inactive_users:
+          title: Delete inactive users
+          type: boolean
+        is_user_role_optional:
+          title: Is user role optional
+          type: boolean
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+    WorkflowList:
+      required:
+      - event
+      - can_be_supressed
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company_id:
+          title: Company id
+          type: string
+          readOnly: true
+        event_source:
+          title: Event source
+          type: string
+          readOnly: true
+        event_destination:
+          title: Event destination
+          type: string
+          readOnly: true
+        action:
+          title: Action
+          type: string
+          readOnly: true
+        event:
+          title: Event
+          type: string
+          minLength: 1
+        can_be_supressed:
+          title: Can be supressed
+          type: boolean
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+        channels:
+          type: array
+          items:
+            title: Channels
+            type: string
+            maxLength: 100
+            minLength: 1
+    SimpleQuestion:
+      required:
+      - title
+      - explanation
+      - lesson
+      - answers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Lesson Scenario Content
+          description: "You must use the Slack nomenclature for\n        the markdown, for more info visit:\n        https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          minLength: 1
+        explanation:
+          title: Lesson Scenario Explanation
+          type: string
+          format: uri
+          maxLength: 200
+          minLength: 1
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        lesson:
+          title: Lesson
+          type: string
+          format: uuid
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionAnswer'
+        type:
+          title: Lesson Type
+          type: string
+          enum:
+          - multi_select
+          - multi_choice
+    CompanyNotificationSchedule:
+      required:
+      - company
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        sunday:
+          title: Sunday
+          type: boolean
+        monday:
+          title: Monday
+          type: boolean
+        tuesday:
+          title: Tuesday
+          type: boolean
+        wednesday:
+          title: Wednesday
+          type: boolean
+        thursday:
+          title: Thursday
+          type: boolean
+        friday:
+          title: Friday
+          type: boolean
+        saturday:
+          title: Saturday
+          type: boolean
+        send_from:
+          title: Send from
+          type: string
+        send_to:
+          title: Send to
+          type: string
+        active:
+          title: Active
+          type: boolean
+        company:
+          title: Company
+          type: string
+          format: uuid
+    Employee:
+      required:
+      - name
+      - email
+      - slack_uid
+      - role_serialized
+      - company_details
+      - notifications
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          maxLength: 80
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        slack_uid:
+          title: Slack uid
+          type:
+          - string
+          - 'null'
+          maxLength: 254
+        role:
+          title: Role
+          type:
+          - string
+          - 'null'
+          format: uuid
+        role_serialized:
+          $ref: '#/components/schemas/Role'
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          title: User
+          type: string
+          format: uuid
+          readOnly: true
+        is_admin:
+          title: Is admin
+          type: boolean
+        is_manager:
+          title: Is manager
+          type: string
+          readOnly: true
+        company_details:
+          $ref: '#/components/schemas/Company'
+        avatar_image:
+          title: Avatar Image
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        points:
+          title: Points
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        level:
+          title: Level
+          type: string
+          readOnly: true
+        notifications:
+          $ref: '#/components/schemas/EmployeeNotifications'
+        google_id:
+          title: Google id
+          type: string
+          readOnly: true
+          minLength: 1
+    CustomMessage:
+      required:
+      - editor_content
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        editor_content:
+          $ref: '#/components/schemas/RichTextEditorState'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        enabled:
+          title: Enabled
+          type: boolean
+        slack_markup:
+          title: Slack Markup
+          type:
+          - string
+          - 'null'
+        polymorphic_ctype:
+          title: Polymorphic ctype
+          type: integer
+          readOnly: true
+    lesson_image_in_lesson_serializers:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        image_name:
+          title: Image Name
+          type:
+          - string
+          - 'null'
+          maxLength: 200
+        image_url:
+          title: Image url
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        image_url_public:
+          title: Image url public
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        editor_content:
+          title: Editor Content
+          type:
+          - string
+          - 'null'
+          format: uuid
+        content_type:
+          title: Content Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - lesson
+          - quiz
+          - engagement_question
+          - engagement_message
+          - assessment_question_content
+    GroupWithMinimalData:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 30
+          minLength: 1
+        icon:
+          title: Icon
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+    Company:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Company name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+          minLength: 1
+        slack_workspace:
+          title: Slack workspace
+          type: string
+          readOnly: true
+          minLength: 1
+        max_users:
+          title: Max users
+          type: string
+          readOnly: true
+        plan_title:
+          title: Plan title
+          type: string
+          readOnly: true
+        plan_price:
+          title: Plan price
+          type: string
+          readOnly: true
+        all_content:
+          title: All content
+          type: string
+          readOnly: true
+        custom_content:
+          title: Custom content
+          type: string
+          readOnly: true
+        has_workflows:
+          title: Has workflows
+          type: string
+          readOnly: true
+        has_paid_streams:
+          title: Has paid streams
+          type: string
+          readOnly: true
+        hris_integration:
+          title: Hris integration
+          type: string
+          readOnly: true
+        has_vanta:
+          title: Has vanta
+          type: string
+          readOnly: true
+        has_api_access:
+          title: Has api access
+          type: string
+          readOnly: true
+        has_docebo:
+          title: Has docebo
+          type: string
+          readOnly: true
+        has_seismic:
+          title: Has seismic
+          type: string
+          readOnly: true
+        has_phishing_access:
+          title: Has phishing access
+          type: string
+          readOnly: true
+        icon:
+          title: Company icon
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        domain:
+          title: Slack domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 256
+        active_employees_trainings:
+          title: Active employees trainings
+          type: string
+          readOnly: true
+        total_employees:
+          title: Total employees
+          type: string
+          readOnly: true
+        guest_accounts_included:
+          title: Guest accounts included
+          type: string
+          readOnly: true
+        is_global_content_maker:
+          title: Is global content maker
+          type: string
+          readOnly: true
+    Notifications:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        company_title:
+          title: Company name
+          type:
+          - string
+          - 'null'
+          maxLength: 80
+          minLength: 1
+        new_users_onboarding:
+          title: New users onboarding
+          type: boolean
+        new_users_onboarding_admin:
+          title: New users onboarding admin
+          type: boolean
+        users_completed_training_admin:
+          title: Users completed training admin
+          type: boolean
+        users_assigned_training_admin:
+          title: Users assigned training admin
+          type: boolean
+        weekly_report:
+          title: Weekly report
+          type: boolean
+        overdue_training_reminder:
+          title: Overdue training reminder
+          type: boolean
+        phishing_messages_admin:
+          title: Phishing messages admin
+          type: boolean
+        phishing_reminder_to_report:
+          title: Phishing reminder to report
+          type: boolean
+    TrainingSerializerCompany:
+      required:
+      - company
+      - curriculum
+      - renew_date
+      - lessons
+      - groups
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+        company_details:
+          $ref: '#/components/schemas/Company'
+        curriculum:
+          title: Curriculum
+          type: string
+          minLength: 1
+        annual:
+          title: Annual
+          type: boolean
+        start_date:
+          title: Start date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renew_date:
+          title: Renew date
+          type: string
+          format: date
+        end_date:
+          title: End date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        days_till_due:
+          title: Days till due
+          type:
+          - number
+          - 'null'
+        active:
+          title: Active
+          type: boolean
+        created_by:
+          title: Created by
+          type:
+          - string
+          - 'null'
+          format: uuid
+        curriculum_detail:
+          $ref: '#/components/schemas/Curriculum'
+        creator_slack_uid:
+          title: Creator slack uid
+          type: string
+          readOnly: true
+        total_employees:
+          title: Total employees
+          type: string
+          readOnly: true
+        employees_finished_count:
+          title: Employees finished count
+          type: string
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+        auto_enroll_google:
+          title: Auto enroll google
+          type: boolean
+        renew_cycle:
+          title: Renew cycle
+          type: string
+          enum:
+          - none
+          - quarterly
+          - semi-annual
+          - annual
+        obey_assignment_dates:
+          title: Obey assignment dates
+          type: boolean
+        passing_grade:
+          title: Passing grade
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        curriculum_title:
+          title: Curriculum title
+          type: string
+          minLength: 1
+        curriculum_type:
+          title: Curriculum type
+          type: string
+          format: uuid
+        channels:
+          type: array
+          items:
+            title: Channels
+            type: string
+            maxLength: 100
+            minLength: 1
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleLesson'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrainingTag'
+          readOnly: true
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupWithMinimalData'
+        show_correctness_indicator_on_results:
+          title: Show correctness indicator on results
+          type: boolean
+    PhishingCompanySettings:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        forwarding_emails:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Forwarding emails
+            type: string
+            maxLength: 255
+            minLength: 1
+        phishing_email_forwarded_notification_emails:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Phishing email forwarded notification emails
+            type: string
+            maxLength: 255
+            minLength: 1
+        imap_ssl_host:
+          title: Imap ssl host
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        imap_ssl_port:
+          title: Imap ssl port
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    CompanyEvent:
+      required:
+      - event_id
+      - event_name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        event_id:
+          title: Event id
+          type: string
+          format: uuid
+        event_name:
+          title: Event name
+          type: string
+          minLength: 1
+        risk_level:
+          title: Risk level
+          type: string
+          enum:
+          - none
+          - low
+          - medium
+          - high
+    EmployeeGetBeforeEditTraining:
+      required:
+      - slack_uid
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        slack_uid:
+          title: Slack uid
+          type: string
+          minLength: 1
+    CompanyAPIKey:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          readOnly: true
+          minLength: 1
+        name:
+          title: Name
+          description: A free-form name for the API key. Need not be unique. 50 characters max.
+          type: string
+          maxLength: 50
+          minLength: 1
+        created:
+          title: Created
+          type: string
+          format: date-time
+          readOnly: true
+    EmployeeWithoutCompanyDetails:
+      required:
+      - name
+      - email
+      - slack_uid
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          maxLength: 80
+          minLength: 1
+        avatar_image:
+          title: Avatar Image
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        email:
+          title: Email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        slack_uid:
+          title: Slack uid
+          type:
+          - string
+          - 'null'
+          maxLength: 254
+        role:
+          title: Role
+          type:
+          - string
+          - 'null'
+          format: uuid
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          title: User
+          type: string
+          format: uuid
+          readOnly: true
+        is_admin:
+          title: Is admin
+          type: boolean
+        is_manager:
+          title: Is manager
+          type: string
+          readOnly: true
+        points:
+          title: Points
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        level:
+          title: Level
+          type: string
+          readOnly: true
+    Owner:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        name:
+          title: Name
+          type: string
+          minLength: 1
+    MigrateCurriculumOnTrainingRenew:
+      required:
+      - renewal_date
+      - new_curriculum_title
+      - number_of_assigned_employees
+      - obey_assignment_dates
+      type: object
+      properties:
+        renewal_date:
+          title: Renewal date
+          type: string
+          minLength: 1
+        new_curriculum_title:
+          title: New curriculum title
+          type: string
+          minLength: 1
+        number_of_assigned_employees:
+          title: Number of assigned employees
+          type: integer
+        obey_assignment_dates:
+          title: Obey assignment dates
+          type: boolean
+    Training:
+      required:
+      - curriculum
+      - renew_date
+      - lessons
+      - groups
+      - docebo_course
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        curriculum:
+          title: Curriculum
+          type: string
+          minLength: 1
+        annual:
+          title: Annual
+          type: boolean
+        start_date:
+          title: Start date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          title: End date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renew_date:
+          title: Renew date
+          type: string
+          format: date
+        renew_cycle:
+          title: Renew cycle
+          type: string
+          enum:
+          - none
+          - quarterly
+          - semi-annual
+          - annual
+        days_till_due:
+          title: Days till due
+          type:
+          - number
+          - 'null'
+        active:
+          title: Active
+          type: boolean
+          readOnly: true
+        created_by:
+          title: Created by
+          type:
+          - string
+          - 'null'
+          format: uuid
+        curriculum_detail:
+          $ref: '#/components/schemas/Curriculum'
+        creator_slack_uid:
+          title: Creator slack uid
+          type: string
+          readOnly: true
+        total_employees:
+          title: Total employees
+          type: string
+          readOnly: true
+        employees_finished_count:
+          title: Employees finished count
+          type: string
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+        obey_assignment_dates:
+          title: Obey assignment dates
+          type: boolean
+        passing_grade:
+          title: Passing grade
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        curriculum_title:
+          title: Curriculum title
+          type: string
+          minLength: 1
+        curriculum_type:
+          title: Curriculum type
+          type: string
+          format: uuid
+        channels:
+          type: array
+          items:
+            title: Channels
+            type: string
+            maxLength: 100
+            minLength: 1
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleLesson'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrainingTag'
+          readOnly: true
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupWithMinimalData'
+        docebo_course:
+          $ref: '#/components/schemas/DoceboTrainingConnector'
+        show_correctness_indicator_on_results:
+          title: Show correctness indicator on results
+          type: boolean
+        custom_enrollment_message:
+          $ref: '#/components/schemas/CustomMessage'
+    SimpleCompanyEngagement:
+      required:
+      - company
+      - quiz_id
+      - quiz_title
+      - channel
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+        quiz_id:
+          title: Quiz id
+          type: string
+          minLength: 1
+        quiz_title:
+          title: Quiz title
+          type: string
+          minLength: 1
+        channel:
+          title: Channel
+          type: string
+          minLength: 1
+        questions:
+          title: Questions
+          type: string
+          readOnly: true
+        send_cycle:
+          title: Send cycle
+          type: string
+          enum:
+          - once
+          - weekly
+          - monthly
+          - quarterly
+          - semi-annual
+          - annual
+    Curriculum:
+      required:
+      - title
+      - subtitle
+      - curriculum_type
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Training Title
+          type: string
+          maxLength: 150
+          minLength: 1
+        subtitle:
+          title: Training Subtitle
+          type: string
+          maxLength: 255
+          minLength: 1
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        curriculum_type:
+          title: Category
+          type: string
+          format: uuid
+        training_sample:
+          title: Training Sample URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        is_technical:
+          title: Is technical
+          type: boolean
+        is_archived:
+          title: Is archived
+          type: boolean
+        is_published:
+          title: Is published
+          type: boolean
+        is_editable:
+          title: Is editable
+          type: boolean
+          readOnly: true
+        author_name:
+          title: Author name
+          type: string
+          readOnly: true
+        author_icon_url:
+          title: Author Icon URL
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        is_already_in_use:
+          title: Is already in use
+          type: string
+          readOnly: true
+        active_training_id:
+          title: Active training id
+          type: string
+          readOnly: true
+        is_available_for_free:
+          title: Is available for free
+          type: boolean
+        curriculum_type_details:
+          $ref: '#/components/schemas/CurriculumType'
+        action_id:
+          title: Answer Action Id
+          type: string
+          enum:
+          - lesson_submit
+          - branching
+        includes_video:
+          title: Includes video
+          type: string
+          readOnly: true
+        average_length:
+          title: Average length
+          type: string
+          readOnly: true
+    EmployeeTrainingManageList:
+      required:
+      - employee
+      - employee_name
+      - avatar_image
+      - employee_slack_uid
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        employee:
+          title: Employee
+          type: string
+          format: uuid
+        employee_name:
+          title: Employee name
+          type: string
+          minLength: 1
+        avatar_image:
+          title: Avatar image
+          type: string
+          minLength: 1
+        employee_slack_uid:
+          title: Employee slack uid
+          type: string
+          minLength: 1
+        completed_percentage:
+          title: Completed percentage
+          type: string
+          readOnly: true
+        latest_grade:
+          title: Latest grade
+          type: string
+          readOnly: true
+        due_date:
+          title: Due_date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        number_of_attempts:
+          title: Number of attempts
+          type: string
+          readOnly: true
+        is_attempt_active:
+          title: Is attempt active
+          type: string
+          readOnly: true
+        start_date:
+          title: Start_date
+          type: string
+          format: date-time
+          readOnly: true
+        is_past_due:
+          title: Is past due
+          type: string
+          readOnly: true
+    RenewedTraining:
+      required:
+      - curriculum
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        start_date:
+          title: Start date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          title: End date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renew_date:
+          title: Renew date
+          type:
+          - string
+          - 'null'
+          format: date
+        renew_cycle:
+          title: Renew cycle
+          type: string
+          enum:
+          - none
+          - quarterly
+          - semi-annual
+          - annual
+        active:
+          title: Active
+          type: boolean
+          readOnly: true
+        curriculum:
+          title: Curriculum
+          type: string
+          format: uuid
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+    CompanyHomeData:
+      required:
+      - weeklies
+      - company_weeklies
+      - trainings_data
+      - trainings_count
+      type: object
+      properties:
+        weeklies:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeWeeklyHome'
+        company_weeklies:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleCompanyEngagement'
+        trainings_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListTranignsSerializers'
+        trainings_count:
+          title: Trainings count
+          type: integer
+    PhishingTemplate:
+      required:
+      - name
+      - preview_image_url
+      - html_url
+      - sender_email_address
+      - category
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        icon:
+          title: Icon
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        preview_image_url:
+          title: Preview image url
+          type: string
+          maxLength: 255
+          minLength: 1
+        html_url:
+          title: Html url
+          type: string
+          maxLength: 255
+          minLength: 1
+        active:
+          title: Active
+          type: boolean
+        sender_email_address:
+          title: Sender email address
+          type: string
+          maxLength: 255
+          minLength: 1
+        category:
+          $ref: '#/components/schemas/PhishingTemplateCategory'
+    MinimalEmployee:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        slack_uid:
+          title: Slack uid
+          type: string
+          readOnly: true
+          minLength: 1
+        avatar_image:
+          title: Avatar Image
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+    Group:
+      required:
+      - name
+      - manager
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 30
+          minLength: 1
+        icon:
+          title: Icon
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        manager:
+          $ref: '#/components/schemas/GroupMember'
+        members:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+            format: uuid
+          uniqueItems: true
+        channels:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Channels
+            type: string
+            maxLength: 100
+            minLength: 1
+        channels_to_sync:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Channels to sync
+            type: string
+            maxLength: 100
+            minLength: 1
+        slack_user_groups:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Slack user groups
+            type: string
+            maxLength: 100
+            minLength: 1
+    TrainingStats:
+      required:
+      - active_trainings
+      - employee_completed_trainings
+      - employee_completed_trainings_30
+      - employee_completed_trainings_30_60
+      - employee_finished_lesson
+      - employee_finished_lesson_30
+      - employee_finished_lesson_30_60
+      - total_employees
+      - employees_with_training_assigned
+      - past_due_trainings
+      type: object
+      properties:
+        active_trainings:
+          title: Active trainings
+          type: integer
+        employee_completed_trainings:
+          title: Employee completed trainings
+          type: integer
+        employee_completed_trainings_30:
+          title: Employee completed trainings 30
+          type: integer
+        employee_completed_trainings_30_60:
+          title: Employee completed trainings 30 60
+          type: integer
+        employee_finished_lesson:
+          title: Employee finished lesson
+          type: integer
+        employee_finished_lesson_30:
+          title: Employee finished lesson 30
+          type: integer
+        employee_finished_lesson_30_60:
+          title: Employee finished lesson 30 60
+          type: integer
+        total_employees:
+          title: Total employees
+          type: integer
+        employees_with_training_assigned:
+          title: Employees with training assigned
+          type: integer
+        past_due_trainings:
+          title: Past due trainings
+          type: integer
+    editor_state_in_lesson_serializers:
+      required:
+      - content
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        note_editor_state:
+          title: Stringified note Editor's content
+          type:
+          - string
+          - 'null'
+        summary_editor_state:
+          title: Stringified summary Editor's content
+          type:
+          - string
+          - 'null'
+        question_editor_state:
+          title: Stringified question Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_editor_state:
+          title: Stringified quiz Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_message_state:
+          title: Stringified quiz message Editor's content
+          type:
+          - string
+          - 'null'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/lesson_image_in_lesson_serializers'
+    EmployeeNotifications:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        email_notification:
+          title: Email notification
+          type: boolean
+        slack_notification:
+          title: Slack notification
+          type: boolean
+    StreamPostCategory:
+      required:
+      - title
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        title:
+          title: Title
+          type: string
+          maxLength: 60
+          minLength: 1
+    Workflow:
+      required:
+      - action
+      - event
+      - can_be_supressed
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company_id:
+          title: Company id
+          type: string
+          readOnly: true
+        event_source:
+          title: Event source
+          type: string
+          readOnly: true
+        event_destination:
+          title: Event destination
+          type: string
+          readOnly: true
+        action:
+          $ref: '#/components/schemas/Action'
+        event:
+          $ref: '#/components/schemas/CompanyEvent'
+        can_be_supressed:
+          title: Can be supressed
+          type: boolean
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+        channels:
+          type: array
+          items:
+            title: Channels
+            type: string
+            maxLength: 100
+            minLength: 1
+    SimpleLesson:
+      required:
+      - editor_content
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Lesson Title
+          type: string
+          readOnly: true
+          minLength: 1
+        subtitle:
+          title: Lesson Subtitle
+          type: string
+          maxLength: 200
+        note:
+          title: Lesson Description
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+        summary:
+          title: Lesson Content
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+        help_content:
+          title: Help Content (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        written_content:
+          title: External Resources (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        explanation_content:
+          title: Explanation Content (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleQuestion'
+        video_url:
+          title: Video URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        video_position:
+          title: Video position
+          type: string
+          enum:
+          - bottom
+          - top
+        includes_video:
+          title: Includes video
+          type: boolean
+        show_to_browser_link_in_slack:
+          title: Show to browser link in slack
+          type: boolean
+        employees_assigned:
+          title: Employees assigned
+          type: string
+          readOnly: true
+        employees_finished:
+          title: Employees finished
+          type: string
+          readOnly: true
+        editor_content:
+          $ref: '#/components/schemas/editor_state_in_lesson_serializers'
+        is_simple_form:
+          title: Is Simple Lesson
+          type: boolean
+        lesson_custom_video:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomLessonVideo'
+        average_length:
+          title: Average length
+          type: string
+          readOnly: true
+    CompanyIntegrations:
+      required:
+      - gusto
+      - okta
+      - okta_webhook_verified
+      type: object
+      properties:
+        gusto:
+          title: Gusto
+          type: boolean
+        okta:
+          title: Okta
+          type: boolean
+        okta_webhook_verified:
+          title: Okta webhook verified
+          type: boolean
+    PhishingCampaignAttack:
+      required:
+      - template
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        template:
+          $ref: '#/components/schemas/PhishingTemplate'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        report_rate:
+          title: Report rate
+          type: string
+          readOnly: true
+    CustomLessonVideo:
+      required:
+      - name
+      - progress
+      - thumbnail
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        lesson:
+          title: Lesson
+          type:
+          - string
+          - 'null'
+          format: uuid
+        service_id:
+          title: Service ID
+          type: integer
+          readOnly: true
+        name:
+          title: Video Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        duration:
+          title: Duration
+          type: integer
+          readOnly: true
+        hashed_id:
+          title: Hashed id
+          type: string
+          readOnly: true
+        progress:
+          title: Progress
+          type: string
+          format: decimal
+        thumbnail:
+          title: Thumbnail
+          type: string
+          maxLength: 500
+          minLength: 1
+        processed:
+          title: Processed
+          type: boolean
+        plays:
+          title: Plays
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+    CompanyStream:
+      required:
+      - company
+      - stream
+      - owners
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+        stream:
+          title: Stream
+          type: string
+          format: uuid
+        is_active:
+          title: Is active
+          type: boolean
+        review_posts:
+          title: Review posts
+          type: boolean
+        auto_enroll:
+          title: Auto enroll
+          type: boolean
+        posts_in_queue:
+          title: Posts in queue
+          type: string
+          readOnly: true
+        posts_sent:
+          title: Posts sent
+          type: string
+          readOnly: true
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/Owner'
+    TopPerformer:
+      required:
+      - employee
+      type: object
+      properties:
+        employee:
+          $ref: '#/components/schemas/EmployeeWithoutCompanyDetails'
+        completed_percentage:
+          title: Completed percentage
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        completed_trainings:
+          title: Completed trainings
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+    TrainingTag:
+      required:
+      - name
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Training tag name
+          type: string
+          maxLength: 60
+          minLength: 1
+    EmployeeWeeklyHome:
+      required:
+      - quiz_id
+      - quiz_title
+      - send_cycle
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        quiz_id:
+          title: Quiz id
+          type: string
+          minLength: 1
+        quiz_title:
+          title: Quiz title
+          type: string
+          minLength: 1
+        send_cycle:
+          title: Send cycle
+          type: string
+          minLength: 1
+        questions:
+          title: Questions
+          type: string
+          readOnly: true
+        progress_status:
+          title: Progress status
+          type: string
+          readOnly: true
+    PhishingTemplateCategory:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 50
+          minLength: 1
+    ContentImage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        image_name:
+          title: Image Name
+          type:
+          - string
+          - 'null'
+          maxLength: 200
+        image_url:
+          title: Image url
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        image_url_public:
+          title: Image url public
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        editor_content:
+          title: Editor Content
+          type:
+          - string
+          - 'null'
+          format: uuid
+    CompanyStreamPost:
+      required:
+      - company_stream
+      - post
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company_stream:
+          title: Company stream
+          type: string
+          format: uuid
+        post:
+          $ref: '#/components/schemas/StreamPost'
+        global_post_id:
+          title: Global post ID
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        send_admins_message:
+          title: Send admins message
+          type: boolean
+        is_sent_for_review:
+          title: Is sent for review
+          type: boolean
+        sent_for_review_time:
+          title: Sent for review time
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approval_status:
+          title: Approval status
+          type: string
+          enum:
+          - none
+          - approved
+          - skipped
+        updated_by_admin:
+          title: Updated By
+          type: string
+          maxLength: 150
+    DoceboTrainingManagerNotifications:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        is_over_due_on:
+          title: Is over due on
+          type: boolean
+        over_due_schedule:
+          title: Over due schedule
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+        docebo_training_connector:
+          title: Docebo training connector
+          type:
+          - string
+          - 'null'
+          format: uuid
+    CompanyStreamPostWithStatistics:
+      required:
+      - company_stream
+      - post
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company_stream:
+          title: Company stream
+          type: string
+          format: uuid
+        post:
+          $ref: '#/components/schemas/StreamPost'
+        global_post_id:
+          title: Global post ID
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        send_admins_message:
+          title: Send admins message
+          type: boolean
+        is_sent_for_review:
+          title: Is sent for review
+          type: boolean
+        sent_for_review_time:
+          title: Sent for review time
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approval_status:
+          title: Approval status
+          type: string
+          enum:
+          - none
+          - approved
+          - skipped
+        updated_by_admin:
+          title: Updated By
+          type: string
+          maxLength: 150
+        delivered:
+          title: Delivered
+          type: string
+          readOnly: true
+        voted:
+          title: Voted
+          type: string
+          readOnly: true
+        rate:
+          title: Rate
+          type: string
+          readOnly: true
+        ack:
+          title: Ack
+          type: string
+          readOnly: true
+    StreamPost:
+      required:
+      - title
+      - post_content
+      - stream
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        category:
+          $ref: '#/components/schemas/StreamPostCategory'
+        editor_content:
+          $ref: '#/components/schemas/RichTextEditorState'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        video_url:
+          title: Video ULR
+          type:
+          - string
+          - 'null'
+          maxLength: 300
+        post_content:
+          title: Post content
+          type: string
+          minLength: 1
+        send_to_admins_only:
+          title: Send To Admins Only
+          type: boolean
+        send_time:
+          title: Send time
+          type:
+          - string
+          - 'null'
+          format: date-time
+        send_now:
+          title: Send Now
+          type: boolean
+        is_sent:
+          title: Is Sent
+          type: boolean
+        acknowledge_button:
+          title: Acknowledge Button
+          type: boolean
+        include_rating:
+          title: Include Rating
+          type: boolean
+        is_editable:
+          title: Is Editable (by Admins)
+          type: boolean
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        stream:
+          title: Parent Stream
+          type: string
+          format: uuid
+        stream_post_category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          format: uuid
+    EmployeeManageList:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        slack_uid:
+          title: Slack uid
+          type: string
+          readOnly: true
+          minLength: 1
+        avatar_image:
+          title: Avatar Image
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        role:
+          title: Role
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          title: User
+          type: string
+          format: uuid
+          readOnly: true
+        is_admin:
+          title: Is admin
+          type: boolean
+          readOnly: true
+        is_manager:
+          title: Is manager
+          type: string
+          readOnly: true
+        points:
+          title: Points
+          type: integer
+          readOnly: true
+        level:
+          title: Level
+          type: string
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

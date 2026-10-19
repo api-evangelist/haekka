@@ -1,0 +1,700 @@
+openapi: 3.2.0
+info:
+  title: Snippets Integrations API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Integrations
+paths:
+  /api/integrations/:
+    parameters: []
+    get:
+      operationId: api_integrations_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExternalAppPolymorphic'
+      tags:
+      - Integrations
+      summary: Api integrations list
+      x-summary-source: derived
+  /api/integrations/docebo/courses:
+    parameters: []
+    get:
+      operationId: api_integrations_docebo_courses_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DoceboCourseList'
+      tags:
+      - Integrations
+      summary: Api integrations docebo courses list
+      x-summary-source: derived
+  /api/integrations/google/groups:
+    parameters: []
+    get:
+      operationId: api_integrations_google_groups_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoogleGroupsList'
+      tags:
+      - Integrations
+      summary: Api integrations google groups list
+      x-summary-source: derived
+  /api/integrations/merge/{integration}/company/{company_id}/employee/{employee_id}/get_link_token:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_integrations_merge_company_employee_get_link_token_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations merge company employee get link token list
+      x-summary-source: derived
+  /api/integrations/merge/{integration}/company/{company_id}/get_merge_groups:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_integrations_merge_company_get_merge_groups_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations merge company get merge groups list
+      x-summary-source: derived
+  /api/integrations/merge/{integration}/company/{company_id}/remove_merge_integration:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_integrations_merge_company_remove_merge_integration_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations merge company remove merge integration create
+      x-summary-source: derived
+  /api/integrations/merge/{integration}/company/{company_id}/store_access_token:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_integrations_merge_company_store_access_token_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations merge company store access token create
+      x-summary-source: derived
+  /api/integrations/oauth/callback:
+    parameters: []
+    get:
+      operationId: api_integrations_oauth_callback_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations oauth callback list
+      x-summary-source: derived
+  /api/integrations/seismic/content:
+    parameters: []
+    get:
+      operationId: api_integrations_seismic_content_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SeismicContentList'
+      tags:
+      - Integrations
+      summary: Api integrations seismic content list
+      x-summary-source: derived
+  /api/integrations/webhook/{integration}:
+    parameters:
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_integrations_webhook_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations webhook read
+      x-summary-source: derived
+    post:
+      operationId: api_integrations_webhook_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations webhook create
+      x-summary-source: derived
+  /api/integrations/{id}/company/{company_id}:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this external app installation.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_integrations_company_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalAppPolymorphic'
+      tags:
+      - Integrations
+      summary: Api integrations company read
+      x-summary-source: derived
+    put:
+      operationId: api_integrations_company_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalAppPolymorphic'
+      tags:
+      - Integrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalAppPolymorphic'
+        required: true
+      summary: Api integrations company update
+      x-summary-source: derived
+    patch:
+      operationId: api_integrations_company_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalAppPolymorphic'
+      tags:
+      - Integrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalAppPolymorphic'
+        required: true
+      summary: Api integrations company partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_integrations_company_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations company delete
+      x-summary-source: derived
+  /api/integrations/{installation}/company/{company_id}/basic_http_auth:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: installation
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_integrations_company_basic_http_auth_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations company basic http auth create
+      x-summary-source: derived
+  /api/integrations/{installation}/company/{company_id}/oauth/url:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: installation
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_integrations_company_oauth_url_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations company oauth url list
+      x-summary-source: derived
+    post:
+      operationId: api_integrations_company_oauth_url_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations company oauth url create
+      x-summary-source: derived
+  /api/integrations/{installation}/company/{company_id}/wh_config:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: installation
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_integrations_company_wh_config_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalAppWebhookConfigResponse'
+      tags:
+      - Integrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalAppWebhookConfigResponse'
+        required: true
+      summary: Api integrations company wh config create
+      x-summary-source: derived
+  /api/integrations/{integration}/company/{company_id}/get_webhook_auth_header:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: integration
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_integrations_company_get_webhook_auth_header_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Integrations
+      summary: Api integrations company get webhook auth header list
+      x-summary-source: derived
+components:
+  schemas:
+    SeismicContent:
+      required:
+      - resource_type
+      - id
+      - title
+      - is_certification
+      type: object
+      properties:
+        resource_type:
+          title: Resource type
+          type: string
+          minLength: 1
+        id:
+          title: Id
+          type: integer
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        is_certification:
+          title: Is certification
+          type: boolean
+    ExternalAppPolymorphic:
+      type: object
+      properties: {}
+    SeismicContentList:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SeismicContent'
+    DoceboCourseList:
+      required:
+      - items
+      - count
+      - has_more_data
+      - current_page
+      - total_count
+      - total_page_count
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DoceboCourseItem'
+        count:
+          title: Count
+          type: integer
+        has_more_data:
+          title: Has more data
+          type: boolean
+        current_page:
+          title: Current page
+          type: integer
+        total_count:
+          title: Total count
+          type: integer
+        total_page_count:
+          title: Total page count
+          type: integer
+    DoceboCourseItem:
+      required:
+      - id
+      - code
+      - uidCourse
+      - title
+      - type
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          minLength: 1
+        code:
+          title: Code
+          type: string
+          minLength: 1
+        uidCourse:
+          title: Uidcourse
+          type: string
+          minLength: 1
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        type:
+          title: Type
+          type: string
+          minLength: 1
+    GoogleGroupsList:
+      required:
+      - groups
+      type: object
+      properties:
+        groups:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/GoogleGroup'
+        next_page_token:
+          title: Next page token
+          type: string
+          minLength: 1
+    GoogleGroup:
+      required:
+      - id
+      - email
+      - name
+      - direct_members_count
+      - description
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          minLength: 1
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        direct_members_count:
+          title: Direct members count
+          type: string
+          minLength: 1
+        description:
+          title: Description
+          type: string
+          minLength: 1
+    ExternalAppWebhookConfigResponse:
+      required:
+      - success
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+        messages:
+          type: array
+          items:
+            type: string
+            minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,187 @@
+openapi: 3.2.0
+info:
+  title: Snippets Roles API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Roles
+paths:
+  /api/roles/:
+    parameters: []
+    get:
+      operationId: api_roles_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+      tags:
+      - Roles
+      summary: Api roles list
+      x-summary-source: derived
+    post:
+      operationId: api_roles_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags:
+      - Roles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      summary: Api roles create
+      x-summary-source: derived
+  /api/roles/global/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_roles_global_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags:
+      - Roles
+      summary: Api roles global read
+      x-summary-source: derived
+    put:
+      operationId: api_roles_global_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags:
+      - Roles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      summary: Api roles global update
+      x-summary-source: derived
+    patch:
+      operationId: api_roles_global_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags:
+      - Roles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      summary: Api roles global partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_roles_global_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Roles
+      summary: Api roles global delete
+      x-summary-source: derived
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 60
+        technical:
+          title: Technical
+          type: boolean
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

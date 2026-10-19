@@ -1,0 +1,12 @@
+{
+ "url": "https://app.haekka.com/swagger.json",
+ "final": "https://app.haekka.com/swagger.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 274699,
+ "sha256": "2a72ba99e389a551f776580fbeff8c626000dc5c77d00373468210d7e9ba7e5a",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

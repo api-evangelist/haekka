@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Get Trainings API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Get Trainings
+paths:
+  /api/get_trainings:
+    parameters: []
+    post:
+      operationId: api_get_trainings_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Get Trainings
+      summary: Api get trainings create
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

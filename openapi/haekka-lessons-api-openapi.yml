@@ -1,0 +1,755 @@
+openapi: 3.2.0
+info:
+  title: Snippets Lessons API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Lessons
+paths:
+  /api/lessons/:
+    parameters: []
+    get:
+      operationId: api_lessons_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lesson'
+      tags:
+      - Lessons
+      summary: Api lessons list
+      x-summary-source: derived
+    post:
+      operationId: api_lessons_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonWrite'
+      tags:
+      - Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonWrite'
+        required: true
+      summary: Api lessons create
+      x-summary-source: derived
+  /api/lessons/lesson_image_upload/:
+    parameters: []
+    post:
+      operationId: api_lessons_lesson_image_upload_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons lesson image upload create
+      x-summary-source: derived
+  /api/lessons/update_lesson_image/:
+    parameters: []
+    post:
+      operationId: api_lessons_update_lesson_image_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons update lesson image create
+      x-summary-source: derived
+  /api/lessons/wistia/refresh_token:
+    parameters: []
+    get:
+      operationId: api_lessons_wistia_refresh_token_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons wistia refresh token list
+      x-summary-source: derived
+  /api/lessons/wistia/update_video_upload:
+    parameters: []
+    get:
+      operationId: api_lessons_wistia_update_video_upload_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons wistia update video upload list
+      x-summary-source: derived
+    post:
+      operationId: api_lessons_wistia_update_video_upload_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons wistia update video upload create
+      x-summary-source: derived
+    delete:
+      operationId: api_lessons_wistia_update_video_upload_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons wistia update video upload delete
+      x-summary-source: derived
+  /api/lessons/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this lesson.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: api_lessons_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+      tags:
+      - Lessons
+      summary: Api lessons read
+      x-summary-source: derived
+    put:
+      operationId: api_lessons_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonWrite'
+      tags:
+      - Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonWrite'
+        required: true
+      summary: Api lessons update
+      x-summary-source: derived
+    patch:
+      operationId: api_lessons_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonWrite'
+      tags:
+      - Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonWrite'
+        required: true
+      summary: Api lessons partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_lessons_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons delete
+      x-summary-source: derived
+  /api/lessons/{id}/report:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_lessons_report_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons report list
+      x-summary-source: derived
+    post:
+      operationId: api_lessons_report_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Lessons
+      summary: Api lessons report create
+      x-summary-source: derived
+components:
+  schemas:
+    QuestionAnswer:
+      required:
+      - answer
+      - lesson_question
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        answer:
+          title: Answer
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          maxLength: 150
+          minLength: 1
+        correct:
+          title: Correct
+          type: boolean
+        position:
+          title: Order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        lesson_question:
+          title: Lesson question
+          type: string
+          format: uuid
+        next_lesson:
+          title: Next lesson
+          type:
+          - string
+          - 'null'
+          format: uuid
+        explanation:
+          title: Answer Explanation
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+    QuestionAnswerWithoutLessonQuestion:
+      required:
+      - answer
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        answer:
+          title: Answer
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          maxLength: 150
+          minLength: 1
+        position:
+          title: Order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        correct:
+          title: Correct
+          type: boolean
+        next_lesson:
+          title: Next lesson
+          type:
+          - string
+          - 'null'
+          format: uuid
+        explanation:
+          title: Answer Explanation
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+    LessonWrite:
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/QuestionTitleAnswerOnly'
+        title:
+          title: Title
+          type: string
+        subtitle:
+          title: Subtitle
+          type: string
+        note:
+          title: Note
+          type:
+          - string
+          - 'null'
+        summary:
+          title: Summary
+          type: string
+        written_content:
+          title: Written content
+          type:
+          - string
+          - 'null'
+        includes_video:
+          title: Includes video
+          type: boolean
+          default: false
+        show_to_browser_link_in_slack:
+          title: Show to browser link in slack
+          type: boolean
+          default: true
+        video_url:
+          title: Video url
+          type:
+          - string
+          - 'null'
+        video_position:
+          title: Video position
+          type:
+          - string
+          - 'null'
+        curriculum:
+          title: Curriculum
+          type: string
+          format: uuid
+        position:
+          title: Position
+          type: integer
+        editor_content:
+          $ref: '#/components/schemas/EditorState'
+        is_simple_form:
+          title: Is simple form
+          type: boolean
+          default: false
+    CustomLessonVideo:
+      required:
+      - name
+      - progress
+      - thumbnail
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        lesson:
+          title: Lesson
+          type:
+          - string
+          - 'null'
+          format: uuid
+        service_id:
+          title: Service ID
+          type: integer
+          readOnly: true
+        name:
+          title: Video Title
+          type: string
+          maxLength: 300
+          minLength: 1
+        duration:
+          title: Duration
+          type: integer
+          readOnly: true
+        hashed_id:
+          title: Hashed id
+          type: string
+          readOnly: true
+        progress:
+          title: Progress
+          type: string
+          format: decimal
+        thumbnail:
+          title: Thumbnail
+          type: string
+          maxLength: 500
+          minLength: 1
+        processed:
+          title: Processed
+          type: boolean
+        plays:
+          title: Plays
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+    Curriculum:
+      required:
+      - title
+      - subtitle
+      - curriculum_type
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Training Title
+          type: string
+          maxLength: 150
+          minLength: 1
+        subtitle:
+          title: Training Subtitle
+          type: string
+          maxLength: 255
+          minLength: 1
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        curriculum_type:
+          title: Category
+          type: string
+          format: uuid
+        training_sample:
+          title: Training Sample URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        is_technical:
+          title: Is technical
+          type: boolean
+        is_archived:
+          title: Is archived
+          type: boolean
+        is_published:
+          title: Is published
+          type: boolean
+        is_editable:
+          title: Is editable
+          type: boolean
+          readOnly: true
+        author_name:
+          title: Author name
+          type: string
+          readOnly: true
+        author_icon_url:
+          title: Author Icon URL
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        is_already_in_use:
+          title: Is already in use
+          type: string
+          readOnly: true
+        active_training_id:
+          title: Active training id
+          type: string
+          readOnly: true
+        is_available_for_free:
+          title: Is available for free
+          type: boolean
+        curriculum_type_details:
+          $ref: '#/components/schemas/CurriculumType'
+        action_id:
+          title: Answer Action Id
+          type: string
+          enum:
+          - lesson_submit
+          - branching
+        includes_video:
+          title: Includes video
+          type: string
+          readOnly: true
+        average_length:
+          title: Average length
+          type: string
+          readOnly: true
+    EditorState:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        note_editor_state:
+          title: Stringified note Editor's content
+          type:
+          - string
+          - 'null'
+        summary_editor_state:
+          title: Stringified summary Editor's content
+          type:
+          - string
+          - 'null'
+        question_editor_state:
+          title: Stringified question Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_editor_state:
+          title: Stringified quiz Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_message_state:
+          title: Stringified quiz message Editor's content
+          type:
+          - string
+          - 'null'
+    Question:
+      required:
+      - explanation
+      - lesson
+      - answers
+      - curriculum_id
+      - curriculum_title
+      - curriculum_action_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          readOnly: true
+        explanation:
+          title: Lesson Scenario Explanation
+          type: string
+          format: uri
+          maxLength: 200
+          minLength: 1
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        lesson:
+          title: Lesson
+          type: string
+          format: uuid
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionAnswer'
+        type:
+          title: Lesson Type
+          type: string
+          enum:
+          - multi_select
+          - multi_choice
+        curriculum_id:
+          title: Curriculum id
+          type: string
+          minLength: 1
+        curriculum_title:
+          title: Curriculum title
+          type: string
+          minLength: 1
+        curriculum_action_id:
+          title: Curriculum action id
+          type: string
+          minLength: 1
+        lesson_id:
+          title: Lesson id
+          type: string
+          readOnly: true
+    CurriculumType:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Curriculum type name
+          type: string
+          maxLength: 60
+          minLength: 1
+        titles:
+          title: Titles
+          type: string
+          readOnly: true
+    QuestionTitleAnswerOnly:
+      required:
+      - title
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        title:
+          title: Lesson Scenario Content
+          description: "You must use the Slack nomenclature for\n        the markdown, for more info visit:\n        https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          minLength: 1
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionAnswerWithoutLessonQuestion'
+        type:
+          title: Lesson Type
+          type: string
+          enum:
+          - multi_select
+          - multi_choice
+    Lesson:
+      required:
+      - curriculum
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Lesson Title
+          type: string
+          readOnly: true
+          minLength: 1
+        subtitle:
+          title: Lesson Subtitle
+          type: string
+          maxLength: 200
+        curriculum:
+          $ref: '#/components/schemas/Curriculum'
+        note:
+          title: Note
+          type: string
+          readOnly: true
+        summary:
+          title: Summary
+          type: string
+          readOnly: true
+        help_content:
+          title: Help Content (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        written_content:
+          title: External Resources (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        explanation_content:
+          title: Explanation Content (URL)
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        video_url:
+          title: Video URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        video_position:
+          title: Video position
+          type: string
+          enum:
+          - bottom
+          - top
+        includes_video:
+          title: Includes video
+          type: boolean
+        employees_assigned:
+          title: Employees assigned
+          type: string
+          readOnly: true
+        employees_finished:
+          title: Employees finished
+          type: string
+          readOnly: true
+        is_simple_form:
+          title: Is Simple Lesson
+          type: boolean
+        lesson_custom_video:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomLessonVideo'
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

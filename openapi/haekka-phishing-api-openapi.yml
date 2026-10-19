@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: Snippets Phishing API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Phishing
+paths:
+  /api/phishing/categories:
+    parameters: []
+    get:
+      operationId: api_phishing_categories_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingTemplateCategory'
+      tags:
+      - Phishing
+      summary: Api phishing categories list
+      x-summary-source: derived
+  /api/phishing/imap:
+    parameters: []
+    get:
+      operationId: api_phishing_imap_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingForwardedNotificationEmailToIMAPCredentialsMapping'
+      tags:
+      - Phishing
+      summary: Api phishing imap list
+      x-summary-source: derived
+    put:
+      operationId: api_phishing_imap_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingForwardedNotificationEmailToIMAPCredentialsMapping'
+      tags:
+      - Phishing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingForwardedNotificationEmailToIMAPCredentialsMapping'
+        required: true
+      summary: Api phishing imap update
+      x-summary-source: derived
+  /api/phishing/imap/test/binding:
+    parameters: []
+    get:
+      operationId: api_phishing_imap_test_binding_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Phishing
+      summary: Api phishing imap test binding list
+      x-summary-source: derived
+  /api/phishing/imap/test/configuration:
+    parameters: []
+    post:
+      operationId: api_phishing_imap_test_configuration_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Phishing
+      summary: Api phishing imap test configuration create
+      x-summary-source: derived
+  /api/phishing/templates:
+    parameters: []
+    get:
+      operationId: api_phishing_templates_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhishingTemplate'
+      tags:
+      - Phishing
+      summary: Api phishing templates list
+      x-summary-source: derived
+components:
+  schemas:
+    PhishingTemplate:
+      required:
+      - name
+      - preview_image_url
+      - html_url
+      - sender_email_address
+      - category
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        icon:
+          title: Icon
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        preview_image_url:
+          title: Preview image url
+          type: string
+          maxLength: 255
+          minLength: 1
+        html_url:
+          title: Html url
+          type: string
+          maxLength: 255
+          minLength: 1
+        active:
+          title: Active
+          type: boolean
+        sender_email_address:
+          title: Sender email address
+          type: string
+          maxLength: 255
+          minLength: 1
+        category:
+          $ref: '#/components/schemas/PhishingTemplateCategory'
+    PhishingForwardedNotificationEmailToIMAPCredentialsMapping:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        decrypted_password:
+          title: Decrypted password
+          type: string
+          readOnly: true
+    PhishingTemplateCategory:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 50
+          minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

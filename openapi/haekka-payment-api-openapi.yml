@@ -1,0 +1,677 @@
+openapi: 3.2.0
+info:
+  title: Snippets Payment API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Payment
+paths:
+  /api/payment/cancel/:
+    parameters: []
+    post:
+      operationId: api_payment_cancel_create
+      description: Cancel customer subscription
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment cancel create
+      x-summary-source: derived
+  /api/payment/change-card/:
+    parameters: []
+    post:
+      operationId: api_payment_change-card_create
+      description: Add or update customer card details
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment change card create
+      x-summary-source: derived
+  /api/payment/change-plan/:
+    parameters: []
+    post:
+      operationId: api_payment_change-plan_create
+      description: Change customer subscription
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment change plan create
+      x-summary-source: derived
+  /api/payment/charges/:
+    parameters: []
+    get:
+      operationId: api_payment_charges_list
+      description: List customer charges
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Charge'
+      tags:
+      - Payment
+      summary: Api payment charges list
+      x-summary-source: derived
+  /api/payment/create-session/:
+    parameters: []
+    post:
+      operationId: api_payment_create-session_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment create session create
+      x-summary-source: derived
+  /api/payment/current-user/:
+    parameters: []
+    get:
+      operationId: api_payment_current-user_read
+      description: See the current customer/user payment details
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentCustomer'
+      tags:
+      - Payment
+      summary: Api payment current user read
+      x-summary-source: derived
+  /api/payment/events/:
+    parameters: []
+    get:
+      operationId: api_payment_events_list
+      description: List customer events
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+      tags:
+      - Payment
+      summary: Api payment events list
+      x-summary-source: derived
+  /api/payment/invoices/:
+    parameters: []
+    get:
+      operationId: api_payment_invoices_list
+      description: List customer invoices
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+      tags:
+      - Payment
+      summary: Api payment invoices list
+      x-summary-source: derived
+  /api/payment/plans/:
+    parameters: []
+    get:
+      operationId: api_payment_plans_list
+      description: List all current plans
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment plans list
+      x-summary-source: derived
+  /api/payment/reactivate-subscription/:
+    parameters: []
+    post:
+      operationId: api_payment_reactivate-subscription_create
+      description: Reactivate customer actual subscrition
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment reactivate subscription create
+      x-summary-source: derived
+  /api/payment/subscription/:
+    parameters: []
+    get:
+      operationId: api_payment_subscription_list
+      description: See, change/set the current customer/user subscription plan
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment subscription list
+      x-summary-source: derived
+    post:
+      operationId: api_payment_subscription_create
+      description: See, change/set the current customer/user subscription plan
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment subscription create
+      x-summary-source: derived
+  /api/payment/v2/create-session/:
+    parameters: []
+    post:
+      operationId: api_payment_v2_create-session_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment v2 create session create
+      x-summary-source: derived
+  /api/payment/webhook/:
+    parameters: []
+    post:
+      operationId: api_payment_webhook_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Payment
+      summary: Api payment webhook create
+      x-summary-source: derived
+components:
+  schemas:
+    Charge:
+      required:
+      - stripe_id
+      - customer
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        stripe_id:
+          title: Stripe id
+          type: string
+          maxLength: 255
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        card_last_4:
+          title: Card last 4
+          type: string
+          maxLength: 4
+        card_kind:
+          title: Card kind
+          type: string
+          maxLength: 50
+        currency:
+          title: Currency
+          type: string
+          maxLength: 10
+          minLength: 1
+        amount:
+          title: Amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        amount_refunded:
+          title: Amount refunded
+          type:
+          - string
+          - 'null'
+          format: decimal
+        description:
+          title: Description
+          type: string
+        paid:
+          title: Paid
+          type:
+          - boolean
+          - 'null'
+        disputed:
+          title: Disputed
+          type:
+          - boolean
+          - 'null'
+        refunded:
+          title: Refunded
+          type:
+          - boolean
+          - 'null'
+        captured:
+          title: Captured
+          type:
+          - boolean
+          - 'null'
+        fee:
+          title: Fee
+          type:
+          - string
+          - 'null'
+          format: decimal
+        receipt_sent:
+          title: Receipt sent
+          type: boolean
+        charge_created:
+          title: Charge created
+          type:
+          - string
+          - 'null'
+          format: date-time
+        customer:
+          title: Customer
+          type: integer
+        invoice:
+          title: Invoice
+          type:
+          - integer
+          - 'null'
+    CurrentCustomer:
+      required:
+      - stripe_id
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        has_active_subscription:
+          title: Has active subscription
+          type: string
+          readOnly: true
+        can_charge:
+          title: Can charge
+          type: string
+          readOnly: true
+        stripe_id:
+          title: Stripe id
+          type: string
+          maxLength: 255
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        card_fingerprint:
+          title: Card fingerprint
+          type: string
+          maxLength: 200
+        card_last_4:
+          title: Card last 4
+          type: string
+          maxLength: 4
+        exp_month:
+          title: Exp month
+          type: string
+          maxLength: 2
+        exp_year:
+          title: Exp year
+          type: string
+          maxLength: 4
+        card_kind:
+          title: Card kind
+          type: string
+          maxLength: 50
+        date_purged:
+          title: Date purged
+          type: string
+          format: date-time
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+    EventProcessingException:
+      required:
+      - data
+      - message
+      - traceback
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        data:
+          title: Data
+          type: string
+          minLength: 1
+        message:
+          title: Message
+          type: string
+          maxLength: 500
+          minLength: 1
+        traceback:
+          title: Traceback
+          type: string
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        event:
+          title: Event
+          type:
+          - integer
+          - 'null'
+    InvoiceItem:
+      required:
+      - stripe_id
+      - amount
+      - period_start
+      - period_end
+      - line_type
+      - invoice
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        stripe_id:
+          title: Stripe id
+          type: string
+          maxLength: 255
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        amount:
+          title: Amount
+          type: string
+          format: decimal
+        currency:
+          title: Currency
+          type: string
+          maxLength: 10
+          minLength: 1
+        period_start:
+          title: Period start
+          type: string
+          format: date-time
+        period_end:
+          title: Period end
+          type: string
+          format: date-time
+        proration:
+          title: Proration
+          type: boolean
+        line_type:
+          title: Line type
+          type: string
+          maxLength: 50
+          minLength: 1
+        description:
+          title: Description
+          type: string
+          maxLength: 200
+        plan:
+          title: Plan
+          type: string
+          maxLength: 100
+        quantity:
+          title: Quantity
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        invoice:
+          title: Invoice
+          type: integer
+    Event:
+      required:
+      - stripe_id
+      - kind
+      - webhook_message
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        event_processing_exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventProcessingException'
+          readOnly: true
+        stripe_id:
+          title: Stripe id
+          type: string
+          maxLength: 255
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        kind:
+          title: Kind
+          type: string
+          maxLength: 250
+          minLength: 1
+        livemode:
+          title: Livemode
+          type: boolean
+        webhook_message:
+          title: Webhook message
+          type: string
+          minLength: 1
+        validated_message:
+          title: Validated message
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        valid:
+          title: Valid
+          type:
+          - boolean
+          - 'null'
+        processed:
+          title: Processed
+          type: boolean
+        customer:
+          title: Customer
+          type:
+          - integer
+          - 'null'
+    Invoice:
+      required:
+      - stripe_id
+      - period_end
+      - period_start
+      - subtotal
+      - total
+      - date
+      - customer
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+          readOnly: true
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+          readOnly: true
+        stripe_id:
+          title: Stripe id
+          type: string
+          maxLength: 255
+          minLength: 1
+        attempted:
+          title: Attempted
+          type:
+          - boolean
+          - 'null'
+        attempts:
+          title: Attempts
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        closed:
+          title: Closed
+          type: boolean
+        paid:
+          title: Paid
+          type: boolean
+        period_end:
+          title: Period end
+          type: string
+          format: date-time
+        period_start:
+          title: Period start
+          type: string
+          format: date-time
+        subtotal:
+          title: Subtotal
+          type: string
+          format: decimal
+        total:
+          title: Total
+          type: string
+          format: decimal
+        currency:
+          title: Currency
+          type: string
+          maxLength: 100
+          minLength: 1
+        date:
+          title: Date
+          type: string
+          format: date-time
+        charge:
+          title: Charge
+          type: string
+          maxLength: 100
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        invoice_pdf:
+          title: Invoice pdf
+          type: string
+          maxLength: 255
+        customer:
+          title: Customer
+          type: integer
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

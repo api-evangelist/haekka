@@ -1,0 +1,698 @@
+openapi: 3.2.0
+info:
+  title: Snippets Assessments API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Assessments
+paths:
+  /api/assessments/:
+    parameters: []
+    get:
+      operationId: api_assessments_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assessment'
+      tags:
+      - Assessments
+      summary: Api assessments list
+      x-summary-source: derived
+    post:
+      operationId: api_assessments_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentSerializerWrite'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentSerializerWrite'
+        required: true
+      summary: Api assessments create
+      x-summary-source: derived
+  /api/assessments/company:
+    parameters: []
+    get:
+      operationId: api_assessments_company_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrainingCompanyAssessment'
+      tags:
+      - Assessments
+      summary: Api assessments company list
+      x-summary-source: derived
+    post:
+      operationId: api_assessments_company_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCompanyAssessmentWrite'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingCompanyAssessmentWrite'
+        required: true
+      summary: Api assessments company create
+      x-summary-source: derived
+  /api/assessments/company/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_assessments_company_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCompanyAssessment'
+      tags:
+      - Assessments
+      summary: Api assessments company read
+      x-summary-source: derived
+    put:
+      operationId: api_assessments_company_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCompanyAssessment'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingCompanyAssessment'
+        required: true
+      summary: Api assessments company update
+      x-summary-source: derived
+    patch:
+      operationId: api_assessments_company_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCompanyAssessment'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingCompanyAssessment'
+        required: true
+      summary: Api assessments company partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_assessments_company_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Assessments
+      summary: Api assessments company delete
+      x-summary-source: derived
+  /api/assessments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_assessments_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assessment'
+      tags:
+      - Assessments
+      summary: Api assessments read
+      x-summary-source: derived
+    put:
+      operationId: api_assessments_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentSerializerWrite'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentSerializerWrite'
+        required: true
+      summary: Api assessments update
+      x-summary-source: derived
+    patch:
+      operationId: api_assessments_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentSerializerWrite'
+      tags:
+      - Assessments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentSerializerWrite'
+        required: true
+      summary: Api assessments partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_assessments_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Assessments
+      summary: Api assessments delete
+      x-summary-source: derived
+components:
+  schemas:
+    editor_state_in_question_serializers:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        note_editor_state:
+          title: Stringified note Editor's content
+          type:
+          - string
+          - 'null'
+        summary_editor_state:
+          title: Stringified summary Editor's content
+          type:
+          - string
+          - 'null'
+        question_editor_state:
+          title: Stringified question Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_editor_state:
+          title: Stringified quiz Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_message_state:
+          title: Stringified quiz message Editor's content
+          type:
+          - string
+          - 'null'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/lesson_image_in_question_serializers'
+    lesson_image_in_question_serializers:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+        image_name:
+          title: Image Name
+          type:
+          - string
+          - 'null'
+          maxLength: 200
+        image_url:
+          title: Image url
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        image_url_public:
+          title: Image url public
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        editor_content:
+          title: Editor Content
+          type:
+          - string
+          - 'null'
+          format: uuid
+        content_type:
+          title: Content Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - lesson
+          - quiz
+          - engagement_question
+          - engagement_message
+          - assessment_question_content
+    AssessmentAnswer:
+      required:
+      - answer
+      type: object
+      properties:
+        id:
+          title: Id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        answer:
+          title: Answer
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          maxLength: 150
+          minLength: 1
+        correct:
+          title: Correct
+          type:
+          - boolean
+          - 'null'
+        position:
+          title: Order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        explanation:
+          title: Answer Explanation
+          type:
+          - string
+          - 'null'
+    AssessmentQuestion:
+      type: object
+      properties:
+        id:
+          title: Id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        position:
+          title: Position
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssessmentAnswer'
+        editor_content:
+          $ref: '#/components/schemas/editor_state_in_question_serializers'
+        image_ids:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        slack_markup:
+          title: Slack markup
+          type: string
+          readOnly: true
+        single_select:
+          title: Single select
+          type: boolean
+        single_correct:
+          title: Single correct
+          type: boolean
+    AssessmentQuestionWrite:
+      required:
+      - slack_markup
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          title: Id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        position:
+          title: Position
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssessmentAnswer'
+        editor_content:
+          $ref: '#/components/schemas/editor_state_in_question_serializers'
+        image_ids:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        slack_markup:
+          title: Slack markup
+          type: string
+          minLength: 1
+        single_select:
+          title: Single select
+          type: boolean
+        single_correct:
+          title: Single correct
+          type: boolean
+    AssessmentSerializerWrite:
+      required:
+      - title
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        questions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AssessmentQuestionWrite'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Assessment Title
+          type: string
+          maxLength: 200
+          minLength: 1
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+    TrainingCompanyAssessment:
+      required:
+      - assessment
+      - company
+      - curriculum
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        passing_grade:
+          title: Passing grade
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        retake_status:
+          title: Retake status
+          type: string
+          enum:
+          - optional
+          - force_retake
+          - force_continue
+        is_active:
+          title: Is active
+          type: boolean
+        position:
+          title: Position
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        polymorphic_ctype:
+          title: Polymorphic ctype
+          type: integer
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+        created_by:
+          title: Created by
+          type:
+          - string
+          - 'null'
+          format: uuid
+        curriculum:
+          title: Curriculum
+          type: string
+          format: uuid
+        lessons_to_skip:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+    TrainingCompanyAssessmentWrite:
+      required:
+      - company
+      - curriculum
+      - assessment
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        passing_grade:
+          title: Passing grade
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        retake_status:
+          title: Retake status
+          type: string
+          enum:
+          - optional
+          - force_retake
+          - force_continue
+        is_active:
+          title: Is active
+          type: boolean
+        position:
+          title: Position
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        polymorphic_ctype:
+          title: Polymorphic ctype
+          type: integer
+          readOnly: true
+        company:
+          title: Company
+          type: string
+          format: uuid
+        created_by:
+          title: Created by
+          type:
+          - string
+          - 'null'
+          format: uuid
+        curriculum:
+          title: Curriculum
+          type: string
+          format: uuid
+        assessment:
+          title: Assessment
+          type: string
+          format: uuid
+        lessons_to_skip:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+    Assessment:
+      required:
+      - questions
+      - title
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssessmentQuestion'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Assessment Title
+          type: string
+          maxLength: 200
+          minLength: 1
+        company:
+          title: Company
+          type:
+          - string
+          - 'null'
+          format: uuid
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

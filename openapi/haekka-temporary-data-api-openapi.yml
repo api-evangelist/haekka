@@ -1,0 +1,40 @@
+openapi: 3.2.0
+info:
+  title: Snippets Temporary Data API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Temporary Data
+paths:
+  /api/temporary_data/{data_id}:
+    parameters:
+    - name: data_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_temporary_data_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Temporary Data
+      summary: Api temporary data read
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

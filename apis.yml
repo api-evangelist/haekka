@@ -70,16 +70,6 @@ tags_raw:
 - SOC 2
 - API
 apis:
-- aid: haekka:haekka-employee-trainings-api
-  name: Haekka Employee Trainings API
-  description: Per-employee training assignments and completion state.
-  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
-  baseURL: https://app.haekka.com/api/public
-  tags:
-  - Employee Trainings
-  properties:
-  - type: OpenAPI
-    url: openapi/haekka-employee-trainings-api-openapi.yml
 - aid: haekka:haekka-employees-api
   name: Haekka Employees API
   description: Company employees enrolled in Haekka.
@@ -90,16 +80,298 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/haekka-employees-api-openapi.yml
-- aid: haekka:haekka-trainings-api
-  name: Haekka Trainings API
-  description: Training courses configured for the company.
+- aid: haekka:haekka-analytics-api
+  name: Haekka Analytics API
+  description: The analytics API from Haekka — 1 operation(s) for analytics.
   humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
   baseURL: https://app.haekka.com/api/public
   tags:
-  - Trainings
+  - analytics
   properties:
   - type: OpenAPI
-    url: openapi/haekka-trainings-api-openapi.yml
+    url: openapi/haekka-analytics-api-openapi.yml
+- aid: haekka:haekka-answers-api
+  name: Haekka Answers API
+  description: The Answers API from Haekka — 4 operation(s) for answers.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Answers
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-answers-api-openapi.yml
+- aid: haekka:haekka-assessments-api
+  name: Haekka Assessments API
+  description: The Assessments API from Haekka — 4 operation(s) for assessments.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Assessments
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-assessments-api-openapi.yml
+- aid: haekka:haekka-authenticate-with-slack-api
+  name: Haekka Authenticate With Slack API
+  description: >-
+    The authenticate_with_slack API from Haekka — 1 operation(s) for authenticate_with_slack.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - authenticate_with_slack
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-authenticate-with-slack-api-openapi.yml
+- aid: haekka:haekka-companies-api
+  name: Haekka Companies API
+  description: The Companies API from Haekka — 68 operation(s) for companies.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-companies-api-openapi.yml
+- aid: haekka:haekka-curriculums-api
+  name: Haekka Curriculums API
+  description: The Curriculums API from Haekka — 9 operation(s) for curriculums.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Curriculums
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-curriculums-api-openapi.yml
+- aid: haekka:haekka-evdtevents-api
+  name: Haekka Evdtevents API
+  description: The Evdtevents API from Haekka — 1 operation(s) for evdtevents.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Evdtevents
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-evdtevents-api-openapi.yml
+- aid: haekka:haekka-feature-flags-api
+  name: Haekka Feature Flags API
+  description: The feature_flags API from Haekka — 1 operation(s) for feature_flags.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - feature_flags
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-feature-flags-api-openapi.yml
+- aid: haekka:haekka-file-api
+  name: Haekka File API
+  description: The file API from Haekka — 1 operation(s) for file.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - file
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-file-api-openapi.yml
+- aid: haekka:haekka-get-employees-in-stream-api
+  name: Haekka Get Employees In Stream API
+  description: >-
+    The Get Employees In Stream API from Haekka — 1 operation(s) for get employees in stream.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Get Employees In Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-get-employees-in-stream-api-openapi.yml
+- aid: haekka:haekka-get-trainings-api
+  name: Haekka Get Trainings API
+  description: The Get Trainings API from Haekka — 1 operation(s) for get trainings.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Get Trainings
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-get-trainings-api-openapi.yml
+- aid: haekka:haekka-google-login-api
+  name: Haekka Google Login API
+  description: The google_login API from Haekka — 1 operation(s) for google_login.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - google_login
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-google-login-api-openapi.yml
+- aid: haekka:haekka-html-to-pdf-api
+  name: Haekka Html To PDF API
+  description: The html_to_pdf API from Haekka — 1 operation(s) for html_to_pdf.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - html_to_pdf
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-html-to-pdf-api-openapi.yml
+- aid: haekka:haekka-integrations-api
+  name: Haekka Integrations API
+  description: The Integrations API from Haekka — 15 operation(s) for integrations.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-integrations-api-openapi.yml
+- aid: haekka:haekka-internal-event-logger-api
+  name: Haekka Internal Event Logger API
+  description: The Internal Event Logger API from Haekka — 1 operation(s) for internal event logger.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Internal Event Logger
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-internal-event-logger-api-openapi.yml
+- aid: haekka:haekka-lessons-api
+  name: Haekka Lessons API
+  description: The Lessons API from Haekka — 7 operation(s) for lessons.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Lessons
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-lessons-api-openapi.yml
+- aid: haekka:haekka-notifications-api
+  name: Haekka Notifications API
+  description: The Notifications API from Haekka — 1 operation(s) for notifications.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-notifications-api-openapi.yml
+- aid: haekka:haekka-payment-api
+  name: Haekka Payment API
+  description: The Payment API from Haekka — 13 operation(s) for payment.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-payment-api-openapi.yml
+- aid: haekka:haekka-phishing-api
+  name: Haekka Phishing API
+  description: The Phishing API from Haekka — 5 operation(s) for phishing.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Phishing
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-phishing-api-openapi.yml
+- aid: haekka:haekka-public-api
+  name: Haekka Public API
+  description: The Public API from Haekka — 12 operation(s) for public.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Public
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-public-api-openapi.yml
+- aid: haekka:haekka-questions-api
+  name: Haekka Questions API
+  description: The Questions API from Haekka — 3 operation(s) for questions.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-questions-api-openapi.yml
+- aid: haekka:haekka-quizzes-api
+  name: Haekka Quizzes API
+  description: The Quizzes API from Haekka — 12 operation(s) for quizzes.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Quizzes
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-quizzes-api-openapi.yml
+- aid: haekka:haekka-roles-api
+  name: Haekka Roles API
+  description: The Roles API from Haekka — 2 operation(s) for roles.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-roles-api-openapi.yml
+- aid: haekka:haekka-signin-with-slack-api
+  name: Haekka Signin With Slack API
+  description: The signin_with_slack API from Haekka — 1 operation(s) for signin_with_slack.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - signin_with_slack
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-signin-with-slack-api-openapi.yml
+- aid: haekka:haekka-slack-api
+  name: Haekka Slack API
+  description: The Slack API from Haekka — 2 operation(s) for slack.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Slack
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-slack-api-openapi.yml
+- aid: haekka:haekka-streams-api
+  name: Haekka Streams API
+  description: The Streams API from Haekka — 6 operation(s) for streams.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-streams-api-openapi.yml
+- aid: haekka:haekka-temporary-data-api
+  name: Haekka Temporary Data API
+  description: The Temporary Data API from Haekka — 1 operation(s) for temporary data.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Temporary Data
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-temporary-data-api-openapi.yml
+- aid: haekka:haekka-vanta-api
+  name: Haekka Vanta API
+  description: The Vanta API from Haekka — 4 operation(s) for vanta.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - Vanta
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-vanta-api-openapi.yml
+- aid: haekka:haekka-wistia-web-hook-api
+  name: Haekka Wistia Web Hook API
+  description: The wistia_web_hook API from Haekka — 1 operation(s) for wistia_web_hook.
+  humanURL: https://www.haekka.com/documentation/haekka-public-api-documentation
+  baseURL: https://app.haekka.com/api/public
+  tags:
+  - wistia_web_hook
+  properties:
+  - type: OpenAPI
+    url: openapi/haekka-wistia-web-hook-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

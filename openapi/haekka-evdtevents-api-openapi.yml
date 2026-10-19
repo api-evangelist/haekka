@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  title: Snippets Evdtevents API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Evdtevents
+paths:
+  /api/evdtevents/:
+    parameters: []
+    get:
+      operationId: api_evdtevents_list
+      description: ''
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EVDTEvent'
+      tags:
+      - Evdtevents
+      summary: Api evdtevents list
+      x-summary-source: derived
+components:
+  schemas:
+    EVDTEvent:
+      required:
+      - name
+      - description
+      - exact_name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        event_source:
+          title: Event source
+          type: string
+          enum:
+          - slack
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type: string
+          maxLength: 255
+          minLength: 1
+        standard_response:
+          title: Standard response
+          type:
+          - string
+          - 'null'
+        exact_name:
+          title: Exact name
+          type: string
+          maxLength: 255
+          minLength: 1
+        recommended_risk_level:
+          title: Recommended risk level
+          type: string
+          enum:
+          - none
+          - low
+          - medium
+          - high
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

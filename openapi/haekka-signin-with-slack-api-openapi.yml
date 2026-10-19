@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Signin With Slack API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: signin_with_slack
+paths:
+  /signin_with_slack:
+    parameters: []
+    get:
+      operationId: signin_with_slack_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - signin_with_slack
+      summary: Signin with slack list
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

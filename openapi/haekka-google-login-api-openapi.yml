@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Google Login API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: google_login
+paths:
+  /google_login/:
+    parameters: []
+    get:
+      operationId: google_login_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - google_login
+      summary: Google login list
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

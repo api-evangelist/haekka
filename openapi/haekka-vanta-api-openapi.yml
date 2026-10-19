@@ -1,0 +1,86 @@
+openapi: 3.2.0
+info:
+  title: Snippets Vanta API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Vanta
+paths:
+  /api/vanta/oauth/callback:
+    parameters: []
+    get:
+      operationId: api_vanta_oauth_callback_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Vanta
+      summary: Api vanta oauth callback list
+      x-summary-source: derived
+  /api/vanta/oauth/url/{company_id}:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_vanta_oauth_url_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Vanta
+      summary: Api vanta oauth url read
+      x-summary-source: derived
+  /api/vanta/sync/{company_id}:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_vanta_sync_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Vanta
+      summary: Api vanta sync create
+      x-summary-source: derived
+  /api/vanta/uninstall/{company_id}:
+    parameters:
+    - name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_vanta_uninstall_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Vanta
+      summary: Api vanta uninstall create
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

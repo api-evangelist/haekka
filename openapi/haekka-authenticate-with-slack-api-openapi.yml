@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Authenticate With Slack API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: authenticate_with_slack
+paths:
+  /authenticate_with_slack:
+    parameters: []
+    get:
+      operationId: authenticate_with_slack_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - authenticate_with_slack
+      summary: Authenticate with slack list
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

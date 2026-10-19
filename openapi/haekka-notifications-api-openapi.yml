@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Snippets Notifications API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Notifications
+paths:
+  /api/notifications/snooze_reminder:
+    parameters: []
+    post:
+      operationId: api_notifications_snooze_reminder_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Notifications
+      summary: Api notifications snooze reminder create
+      x-summary-source: derived
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,842 @@
+openapi: 3.2.0
+info:
+  title: Snippets Public API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Public
+paths:
+  /api/public/employee_trainings/:
+    parameters: []
+    get:
+      operationId: EmployeeTrainingList
+      description: 'List all employee training objects. Employee Training object represents
+
+        assignement of a training to an employee.
+
+
+        If you want to fetch only assigned trainings to one particular employee,
+
+        you can use the `employee_id` query parameter.
+
+
+        Or if you want to see all employees assigned to a particulat training,
+
+        you can use the `training_id` query parameter.'
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: employee_id
+        in: query
+        description: Employee ID
+        schema:
+          type: string
+      - name: training_id
+        in: query
+        description: Training ID
+        schema:
+          type: string
+      - name: employee_name
+        in: query
+        description: Employee Name
+        schema:
+          type: string
+      - name: training_name
+        in: query
+        description: Training Name
+        schema:
+          type: string
+      - name: completion_status
+        in: query
+        description: Employee Training Completion Status
+        schema:
+          type: boolean
+      - name: year
+        in: query
+        description: Employee Training Year
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PublicEmployeeTraining'
+      tags:
+      - Public
+      summary: Employee training list
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Employee Training List
+  /api/public/employee_trainings/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: EmployeeTrainingRetrieve
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicEmployeeTraining'
+      tags:
+      - Public
+      summary: Employee training retrieve
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Employee Training Retrieve
+    put:
+      operationId: api_public_employee_trainings_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicEmployeeTraining'
+      tags:
+      - Public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicEmployeeTraining'
+        required: true
+      summary: Api public employee trainings update
+      x-summary-source: derived
+    patch:
+      operationId: EmployeeTrainingUpdate
+      description: Update an employee training object. Currently we only support completion status and completion rate update.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicEmployeeTraining'
+      tags:
+      - Public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicEmployeeTraining'
+        required: true
+      summary: Employee training update
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Employee Training Update
+  /api/public/employees/:
+    parameters: []
+    get:
+      operationId: EmployeeList
+      description: 'Returns data about employees withing your company that could be
+
+        useful for finding out more information about their training status.'
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PublicEmployeeList'
+      tags:
+      - Public
+      summary: Employee list
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Employee List
+  /api/public/employees/{id}/:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: EmployeeRetrieve
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicEmployee'
+      tags:
+      - Public
+      summary: Employee retrieve
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Employee Retrieve
+  /api/public/phishing/extension/{employee_id}:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_public_phishing_extension_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Public
+      summary: Api public phishing extension create
+      x-summary-source: derived
+    delete:
+      operationId: api_public_phishing_extension_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Public
+      summary: Api public phishing extension delete
+      x-summary-source: derived
+  /api/public/phishing/record/{employee_id}/{campaign_id}/{campaign_attack_id}/{action_type}:
+    parameters:
+    - name: action_type
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: campaign_attack_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: api_public_phishing_record_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhishingCampaignAction'
+      tags:
+      - Public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhishingCampaignAction'
+        required: true
+      summary: Api public phishing record create
+      x-summary-source: derived
+  /api/public/phishing/redirect/{employee_id}/{campaign_id}/{campaign_attack_id}:
+    parameters:
+    - name: campaign_attack_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: campaign_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: api_public_phishing_redirect_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Public
+      summary: Api public phishing redirect read
+      x-summary-source: derived
+  /api/public/status:
+    parameters: []
+    get:
+      operationId: api_public_status_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Public
+      summary: Api public status list
+      x-summary-source: derived
+  /api/public/trainings/:
+    parameters: []
+    get:
+      operationId: TrainingList
+      description: Returns all trainings going on at the moment in the your company.
+      parameters:
+      - name: page
+        in: query
+        description: A page number within the paginated result set.
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PublicTraining'
+      tags:
+      - Public
+      summary: Training list
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Training List
+  /api/public/trainings/assign/:
+    parameters: []
+    post:
+      operationId: TrainingAssign
+      description: Assigns a training to employees
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTrainingAssign'
+      tags:
+      - Public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicTrainingAssign'
+        required: true
+      summary: Training assign
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Training Assign
+  /api/public/trainings/{id}/:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: TrainingRetrieve
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTraining'
+      tags:
+      - Public
+      summary: Training retrieve
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Training Retrieve
+  /api/public/trainings/{id}/evidence:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: DownloadTrainingEvidence
+      description: 'Download Training Evidence. After receiving the request, the view estimates (based on benchmarking) if the report can be returned right away. If so, the report gets generated and served in the response. Otherwise, a JsonResponse is returned with the file generation status and a corresponding message. The message contains information about when the file will be ready for download.
+
+
+        The API key is required and can be set in the Authorization header as a Bearer token, or can be passed as an `auth_token` query parameter (in this case pass the key only, without the `Bearer ` keyword).
+
+
+        To get the report to email or Slack, pass the `email` query parameter along with the `destination` parameter. Supported values for the `destination` parameter are `slack` and `email`'
+      parameters:
+      - name: auth_token
+        in: query
+        description: API key
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: email address
+        required: false
+        schema:
+          type: string
+      - name: destination
+        in: query
+        description: Destination where to send the report to
+        required: false
+        schema:
+          type: string
+          enum:
+          - email
+          - slack
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Public
+      summary: Download training evidence
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Download Training Evidence
+components:
+  schemas:
+    PublicTraining:
+      required:
+      - title
+      - employees_assigned
+      - employees_completed
+      - employees_not_completed
+      - training_completion_percentage
+      - number_of_lessons
+      - training_renews
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        start_date:
+          title: Start date
+          type:
+          - string
+          - 'null'
+          format: date-time
+        employees_assigned:
+          title: Employees assigned
+          type: integer
+        employees_completed:
+          title: Employees completed
+          type: integer
+        employees_not_completed:
+          title: Employees not completed
+          type: integer
+        training_completion_percentage:
+          title: Training completion percentage
+          type: integer
+        number_of_lessons:
+          title: Number of lessons
+          type: integer
+        training_renews:
+          title: Training renews
+          type: boolean
+    PhishingCampaignAttack:
+      required:
+      - template
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        template:
+          $ref: '#/components/schemas/PhishingTemplate'
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        report_rate:
+          title: Report rate
+          type: string
+          readOnly: true
+    PublicEmployeeTraining:
+      required:
+      - employee_name
+      - employee_email
+      - training_name
+      - date_assigned
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        employee_name:
+          title: Employee name
+          type: string
+          minLength: 1
+        employee_email:
+          title: Employee email
+          type: string
+          minLength: 1
+        employee_id:
+          title: Employee id
+          type: string
+          readOnly: true
+        training_name:
+          title: Training name
+          type: string
+          minLength: 1
+        training_id:
+          title: Training id
+          type: string
+          readOnly: true
+        date_assigned:
+          title: Date assigned
+          type: string
+          format: date-time
+        completion_status:
+          title: Completion status
+          type: string
+          readOnly: true
+        completion_rate:
+          title: Completion rate
+          type: string
+          readOnly: true
+        completion_position:
+          title: Completion position
+          type: string
+          readOnly: true
+        year:
+          title: Year
+          type: integer
+          maximum: 32767
+          minimum: 0
+    PhishingCampaignAction:
+      required:
+      - employee
+      - attack
+      - action_type
+      - points
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        employee:
+          $ref: '#/components/schemas/MinimalEmployee'
+        attack:
+          $ref: '#/components/schemas/PhishingCampaignAttack'
+        action_type:
+          title: Action type
+          type: string
+          enum:
+          - report_phishing
+          - do_nothing
+          - open_phishing_mail
+          - click_phishing_link
+          - breach_credentials
+          - forwarded_phishing_mail
+        points:
+          title: Points
+          type: integer
+          enum:
+          - 100
+          - 50
+          - 20
+          - 10
+          - 0
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        priority:
+          title: Priority
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 5
+          - 4
+          - 3
+          - 2
+          - 1
+    PublicEmployeeList:
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          maxLength: 80
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+    PublicEmployee:
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          maxLength: 80
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+    PhishingTemplateCategory:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 50
+          minLength: 1
+    PublicTrainingAssign:
+      required:
+      - training_id
+      - employee_ids
+      type: object
+      properties:
+        training_id:
+          title: Training id
+          type: string
+          format: uuid
+        employee_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+        alert_employees:
+          title: Alert employees
+          type: boolean
+          default: true
+    PhishingTemplate:
+      required:
+      - name
+      - preview_image_url
+      - html_url
+      - sender_email_address
+      - category
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        icon:
+          title: Icon
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        preview_image_url:
+          title: Preview image url
+          type: string
+          maxLength: 255
+          minLength: 1
+        html_url:
+          title: Html url
+          type: string
+          maxLength: 255
+          minLength: 1
+        active:
+          title: Active
+          type: boolean
+        sender_email_address:
+          title: Sender email address
+          type: string
+          maxLength: 255
+          minLength: 1
+        category:
+          $ref: '#/components/schemas/PhishingTemplateCategory'
+    MinimalEmployee:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Employee name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        slack_uid:
+          title: Slack uid
+          type: string
+          readOnly: true
+          minLength: 1
+        avatar_image:
+          title: Avatar Image
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

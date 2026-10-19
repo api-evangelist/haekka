@@ -1,0 +1,360 @@
+openapi: 3.2.0
+info:
+  title: Snippets Questions API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+servers:
+- url: https://app.haekka.com/
+security:
+- Bearer: []
+tags:
+- name: Questions
+paths:
+  /api/questions/quiz:
+    parameters: []
+    get:
+      operationId: api_questions_quiz_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/question_quiz_question_serializer'
+      tags:
+      - Questions
+      summary: Api questions quiz read
+      x-summary-source: derived
+    put:
+      operationId: api_questions_quiz_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizQuestionWrite'
+      tags:
+      - Questions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizQuestionWrite'
+        required: true
+      summary: Api questions quiz update
+      x-summary-source: derived
+    patch:
+      operationId: api_questions_quiz_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizQuestionWrite'
+      tags:
+      - Questions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizQuestionWrite'
+        required: true
+      summary: Api questions quiz partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_questions_quiz_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Questions
+      summary: Api questions quiz delete
+      x-summary-source: derived
+  /api/questions/quiz/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Quiz Question.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    delete:
+      operationId: deleteApiQuestionsQuizById
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Questions
+      summary: Api questions quiz delete
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: api_questions_quiz_delete
+  /api/questions/{id}/assessment:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this multi choice assessment question.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    delete:
+      operationId: api_questions_assessment_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Questions
+      summary: Api questions assessment delete
+      x-summary-source: derived
+components:
+  schemas:
+    question_editor_state_serializer:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        note_editor_state:
+          title: Stringified note Editor's content
+          type:
+          - string
+          - 'null'
+        summary_editor_state:
+          title: Stringified summary Editor's content
+          type:
+          - string
+          - 'null'
+        question_editor_state:
+          title: Stringified question Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_editor_state:
+          title: Stringified quiz Editor's content
+          type:
+          - string
+          - 'null'
+        quiz_message_state:
+          title: Stringified quiz message Editor's content
+          type:
+          - string
+          - 'null'
+        content:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+          uniqueItems: true
+    QuizQuestionWrite:
+      required:
+      - quiz
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestionAnswer'
+        editor_content:
+          $ref: '#/components/schemas/question_editor_state_serializer'
+        image_ids:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        custom_video_id:
+          title: Custom video id
+          type: string
+          minLength: 1
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        quiz_question_context:
+          title: Quiz Question Context
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+        answer_type:
+          title: Answer type
+          type:
+          - string
+          - 'null'
+          enum:
+          - no_action
+          - user_acknowledged
+          - multiple_choice
+          - neutral
+          - written_response
+          - external_url
+        external_url:
+          title: External URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        external_url_btn_text:
+          title: External URL button text
+          type:
+          - string
+          - 'null'
+        single_select:
+          title: Single select
+          type: boolean
+        quiz:
+          title: Quiz
+          type: string
+          format: uuid
+    question_quiz_question_serializer:
+      required:
+      - quiz
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        position:
+          title: Position order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        quiz_question_context:
+          title: Quiz Question Context
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+        answer_type:
+          title: Answer type
+          type:
+          - string
+          - 'null'
+          enum:
+          - no_action
+          - user_acknowledged
+          - multiple_choice
+          - neutral
+          - written_response
+          - external_url
+        external_url:
+          title: External URL
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        external_url_btn_text:
+          title: External URL button text
+          type:
+          - string
+          - 'null'
+        single_select:
+          title: Single select
+          type: boolean
+        quiz:
+          title: Quiz
+          type: string
+          format: uuid
+        editor_content:
+          title: Editor Content
+          type:
+          - string
+          - 'null'
+          format: uuid
+    QuizQuestionAnswer:
+      required:
+      - answer
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        created:
+          title: Created date
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          title: Modified date
+          type: string
+          format: date-time
+          readOnly: true
+        answer:
+          title: Answer
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type: string
+          maxLength: 150
+          minLength: 1
+        position:
+          title: Order
+          type: integer
+          maximum: 32767
+          minimum: -32768
+        correct:
+          title: Correct
+          type:
+          - boolean
+          - 'null'
+        explanation:
+          title: Answer Explanation
+          description: "You must use the Slack nomenclature for the markdown,\n        for more info visit: https://api.slack.com/reference/surfaces/formatting"
+          type:
+          - string
+          - 'null'
+        question:
+          title: Question
+          type: string
+          format: uuid
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
